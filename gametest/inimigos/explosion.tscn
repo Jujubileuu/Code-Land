@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvwmq4a81xsnm"]
+
+[ext_resource type="Texture2D" uid="uid://dayhh5q8shb4k" path="res://arts/5398538.jpg" id="1_dh0m7"]
+[ext_resource type="Script" path="res://inimigos/explosion.gd" id="2_6nvs4"]
+
+[sub_resource type="Animation" id="Animation_2vktb"]
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="Animation" id="Animation_qr7g6"]
+resource_name = "explode"
+length = 0.32
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pp74u"]
+_data = {
+"RESET": SubResource("Animation_2vktb"),
+"explode": SubResource("Animation_qr7g6")
+}
+
+[node name="Explosion" type="Sprite2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_dh0m7")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(72, 832, 2824, 936)
+script = ExtResource("2_6nvs4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pp74u")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
