@@ -7,7 +7,7 @@ var spr_blue = preload("res://arts/gema_azul.png")
 var spr_purple = preload("res://arts/gemas_roxa.png")
 
 var target = null
-var speed = 0
+var speed = -5
 
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D

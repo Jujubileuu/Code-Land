@@ -77,6 +77,21 @@ collision_mask = 8
 position = Vector2(-45, 0)
 shape = SubResource("CircleShape2D_xns4j")
 
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1004.0
+offset_top = -792.0
+offset_right = 996.0
+offset_bottom = -152.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/FireBallTimer" to="." method="_on_fire_ball_timer_timeout"]
 [connection signal="timeout" from="Attack/FireBallTimer/FireBallAttackTimer" to="." method="_on_fire_ball_attack_timer_timeout"]
