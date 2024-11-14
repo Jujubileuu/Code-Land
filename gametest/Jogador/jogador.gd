@@ -3,6 +3,10 @@ extends CharacterBody2D
 var movement_speed = 160.0
 var healph = 100
 
+var experience = 0
+var experience_level = 1
+var collected_experience = 0
+
 var fireBall = preload("res://Jogador/attacks/fireball.tscn")
 @onready var fireBallTimer = get_node("Attack/FireBallTimer")
 @onready var fireBallAttackTimer = get_node("Attack/FireBallTimer/FireBallAttackTimer")
@@ -77,3 +81,12 @@ func _on_enemy_detection_area_body_entered(body):
 func _on_enemy_detection_area_body_exited(body):
 	if enemy_close.has(body):
 		enemy_close.erase(body)
+
+
+func _on_grab_area_area_entered(area):
+	if area.is_in_group("loot"):
+		area.target = self
+
+func _on_collect_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("loot"):
+		var gem_exp = area.collect()

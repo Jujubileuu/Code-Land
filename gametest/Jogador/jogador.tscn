@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=9 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Texture2D" uid="uid://bt0f5ue14icj1" path="res://arts/characterSprite.png" id="1_qeky2"]
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
@@ -14,6 +14,12 @@ radius = 68.2367
 [sub_resource type="CircleShape2D" id="CircleShape2D_37hqo"]
 radius = 1849.2
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqi1a"]
+radius = 300.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xns4j"]
+radius = 50.0
+
 [node name="jogador" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_sqf12")
@@ -25,10 +31,12 @@ texture = ExtResource("1_qeky2")
 zoom = Vector2(0.2, 0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-38.5, -3)
 shape = SubResource("CapsuleShape2D_378vh")
 
 [node name="HurtBox" parent="." instance=ExtResource("3_30451")]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -50,12 +58,31 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
+visible = false
 shape = SubResource("CircleShape2D_37hqo")
+
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+position = Vector2(-45, 0)
+shape = SubResource("CircleShape2D_hqi1a")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+position = Vector2(-45, 0)
+shape = SubResource("CircleShape2D_xns4j")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/FireBallTimer" to="." method="_on_fire_ball_timer_timeout"]
 [connection signal="timeout" from="Attack/FireBallTimer/FireBallAttackTimer" to="." method="_on_fire_ball_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]
