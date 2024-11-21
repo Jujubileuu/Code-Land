@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=11 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Texture2D" uid="uid://bt0f5ue14icj1" path="res://arts/characterSprite.png" id="1_qeky2"]
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
 [ext_resource type="PackedScene" uid="uid://y8stf5kqtp5c" path="res://Utilidade/hurt_box.tscn" id="3_30451"]
+[ext_resource type="Texture2D" uid="uid://cdvxc4eylrdd" path="res://arts/exp_background - Copia.png" id="4_kdlwp"]
+[ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://arts/exp_progress - Copia.png" id="5_armqj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_378vh"]
 radius = 64.0
@@ -82,15 +84,54 @@ shape = SubResource("CircleShape2D_xns4j")
 [node name="GUI" type="Control" parent="GUILayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -1004.0
-offset_top = -792.0
-offset_right = 996.0
-offset_bottom = -152.0
+offset_right = 640.0
+offset_bottom = 360.0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
+offset_right = 640.0
 offset_bottom = 40.0
+texture_under = ExtResource("4_kdlwp")
+texture_progress = ExtResource("5_armqj")
+
+[node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 540.0
+offset_right = 640.0
+offset_bottom = 23.0
+text = "Level: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 0
+offset_left = 800.0
+offset_top = 50.0
+offset_right = 1000.0
+offset_bottom = 300.0
+
+[node name="lbl_LevelUp" type="Label" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "LEVEL UP!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeOptions" type="VBoxContainer" parent="GUILayer/GUI/LevelUp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 190.0
+offset_bottom = 100.0
+
+[node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp"]
+unique_name_in_owner = true
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/FireBallTimer" to="." method="_on_fire_ball_timer_timeout"]

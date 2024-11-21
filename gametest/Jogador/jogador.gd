@@ -20,8 +20,18 @@ var enemy_close = []
 
 @onready var sprite = $Sprite2D
 
+#GUI
+@onready var expBar = get_node("%ExperienceBar")
+@onready var lblLevel = get_node("%lbl_level")
+@onready var levelPanel = get_node("%LevelUp")
+@onready var upgradeOptions = get_node("%UpgradeOptions")
+@onready var itemOptions = preload("res://Utilidade/item_option.tscn")
+@onready var sndLevelUp = get_node("%snd_levelup")
+
+
 func _ready():
 	attack()
+	set_bar(experience, calculate_experiencecap())
 
 func _physics_process(delta):
 	movement()
@@ -98,13 +108,13 @@ func calculate_experience(gem_exp):
 	if experience + collected_experience >= exp_required:
 		collected_experience -= exp_required-experience
 		experience_level += 1
-		print("Level", experience_level)
 		experience = 0
 		exp_required = calculate_experiencecap()
-		calculate_experience(0)
+		levelup()
 	else: 
 		experience += collected_experience
 		collected_experience = 0
+	set_bar(experience, exp_required)
 
 func calculate_experiencecap():
 	var exp_cap = experience_level
@@ -115,3 +125,30 @@ func calculate_experiencecap():
 	else:
 		exp_cap = 255 + (experience_level-39)*12
 	return exp_cap
+
+func set_bar(set_value = 1, set_max_value = 100):
+	expBar.value = set_value
+	expBar.max_value = set_max_value
+
+func levelup():
+	#sndLevelUp.play()
+	lblLevel.text = str("Level: ",experience_level)
+	var tween = levelPanel.create_tween()
+	tween.tween_property(levelPanel,"position",Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	levelPanel.visible = true
+	var options = 0
+	var optionsmax = 3
+	while options < optionsmax:
+		var option_choice = itemOptions.instantiate()
+		upgradeOptions.add_child(option_choice)
+		options += 1
+	get_tree().paused = true
+
+func upgrade_character(upgrade):
+	var option_children = upgradeOptions.get_children()
+	for i in option_children:
+		i.queue_free()
+	levelPanel.visible = false
+	levelPanel.position = Vector2(800,50)
+	get_tree().paused = false
+	calculate_experience(0)

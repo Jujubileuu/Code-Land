@@ -3,11 +3,14 @@ extends CharacterBody2D
 @export var movement_speed = 60.0
 @export var healph = 40
 @export var knockback_recovery = 3.5
+@export var experience = 1
 var knockback = Vector2.ZERO
 @onready var sprite = $Sprite2D
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var loot_base = get_tree().get_first_node_in_group("loot")
 
 var death_anim = preload("res://inimigos/explosion.tscn")
+var exp_gem = preload("res://Objects/experience_gem.tscn")
 
 signal remove_from_array(object)
 
@@ -29,6 +32,10 @@ func death():
 	enemy_death.scale = sprite.scale/10
 	enemy_death.global_position = global_position
 	get_parent().call_deferred("add_child", enemy_death)
+	var new_gem = exp_gem.instantiate()
+	new_gem.global_position = global_position
+	new_gem.experience = experience
+	loot_base.call_deferred("add_child",new_gem)
 	queue_free()
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):

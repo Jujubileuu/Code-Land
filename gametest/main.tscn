@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfdaaod72imwn"]
+[gd_scene load_steps=7 format=3 uid="uid://cfdaaod72imwn"]
 
 [ext_resource type="Texture2D" uid="uid://cchq735lmmxrp" path="res://arts/grassTexture.png" id="1_5l2pk"]
 [ext_resource type="PackedScene" uid="uid://ctdv4apgops" path="res://Jogador/jogador.tscn" id="2_qaeij"]
 [ext_resource type="PackedScene" uid="uid://6i5rryhyg560" path="res://Utilidade/enemy_spawner.tscn" id="3_0hdki"]
 [ext_resource type="Script" path="res://Utilidade/spawn_info.gd" id="4_8gt27"]
 [ext_resource type="PackedScene" uid="uid://dmyb2xu8eai0" path="res://inimigos/enemy.tscn" id="5_rmcho"]
-[ext_resource type="PackedScene" uid="uid://1fhtuts27qw0" path="res://Objects/experience_gem.tscn" id="6_4yvv0"]
 
 [sub_resource type="Resource" id="Resource_vfyub"]
 script = ExtResource("4_8gt27")
@@ -29,8 +28,4 @@ region_rect = Rect2(0, 0, 4000, 4000)
 [node name="EnemySpawner" parent="." instance=ExtResource("3_0hdki")]
 spawns = Array[ExtResource("4_8gt27")]([SubResource("Resource_vfyub")])
 
-[node name="Loot" type="Node2D" parent="."]
-
-[node name="ExperienceGem" parent="Loot" instance=ExtResource("6_4yvv0")]
-position = Vector2(531, 97)
-experience = 100
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
