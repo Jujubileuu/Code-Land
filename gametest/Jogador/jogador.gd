@@ -198,11 +198,12 @@ func get_random_item():
 		elif UpgradeDb.UPGRADES[i]["type"] == "item":
 			pass
 		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0:
+			var to_add = true
 			for n in UpgradeDb.UPGRADES[i]["prerequisite"]:
 				if not n in collected_upgrades:
-					pass
-				else:
-					dblist.append(i)
+					to_add = false
+			if to_add:
+				dblist.append(i)
 		else:
 			dblist.append(i)
 	if dblist.size() > 0:
