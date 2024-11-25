@@ -2,6 +2,7 @@ extends CharacterBody2D #21:04
 
 var movement_speed = 160.0
 var healph = 100
+var maxhealph = 100
 
 var experience = 0
 var experience_level = 1
@@ -11,10 +12,19 @@ var fireBall = preload("res://Jogador/attacks/fireball.tscn")
 @onready var fireBallTimer = get_node("Attack/FireBallTimer")
 @onready var fireBallAttackTimer = get_node("Attack/FireBallTimer/FireBallAttackTimer")
 
+var collected_upgrades = []
+var upgrade_options = []
+var armor = 0
+var speed = 0
+var spell_cooldown = 0
+var spell_size = 0
+var additional_attacks = 0
+
+
 var fireball_ammo = 0
-var fireball_baseammo = 1
+var fireball_baseammo = 0
 var fireball_attackspeed = 1.5
-var fireball_level = 1
+var fireball_level = 0
 
 var enemy_close = []
 
@@ -30,6 +40,7 @@ var enemy_close = []
 
 
 func _ready():
+	upgrade_character("fireball1")
 	attack()
 	set_bar(experience, calculate_experiencecap())
 
@@ -49,17 +60,17 @@ func movement():
 
 func attack():
 	if fireball_level > 0:
-		fireBallTimer.wait_time = fireball_attackspeed
+		fireBallTimer.wait_time = fireball_attackspeed * (1-spell_cooldown)
 		if fireBallTimer.is_stopped():
 			fireBallTimer.start()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
-	healph -= damage
+	healph -= clamp(damage-armor, 1.0, 999.00)
 	print(healph)
 
 
 func _on_fire_ball_timer_timeout():
-	fireball_ammo += fireball_baseammo
+	fireball_ammo += fireball_baseammo + additional_attacks
 	fireBallAttackTimer.start()
 
 
@@ -140,15 +151,63 @@ func levelup():
 	var optionsmax = 3
 	while options < optionsmax:
 		var option_choice = itemOptions.instantiate()
+		option_choice.item = get_random_item()
 		upgradeOptions.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
 
 func upgrade_character(upgrade):
+	match upgrade:
+		"fireball1":
+			fireball_level = 1
+			fireball_baseammo += 1
+		"fireball2":
+			fireball_level = 2
+			fireball_baseammo += 1
+		"fireball3":
+			fireball_level = 3
+		"fireball4":
+			fireball_level = 4
+			fireball_baseammo += 2
+		"armor1","armor2","armor3","armor4":
+			armor += 1
+		"speed1","speed2","speed3","speed4":
+			movement_speed += 20.0
+		"food":
+			healph += 20
+			maxhealph = clamp(healph,0,maxhealph)
+	
+	attack()
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
+	upgrade_options.clear()
+	collected_upgrades.append(upgrade)
 	levelPanel.visible = false
 	levelPanel.position = Vector2(800,50)
 	get_tree().paused = false
 	calculate_experience(0)
+
+func get_random_item():
+	var dblist = []
+	for i in UpgradeDb.UPGRADES:
+		if i in collected_upgrades:
+			pass
+		elif i in upgrade_options:
+			pass
+		elif UpgradeDb.UPGRADES[i]["type"] == "item":
+			pass
+		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0:
+			for n in UpgradeDb.UPGRADES[i]["prerequisite"]:
+				if not n in collected_upgrades:
+					pass
+				else:
+					dblist.append(i)
+		else:
+			dblist.append(i)
+	if dblist.size() > 0:
+		var randomitem = dblist.pick_random()
+		upgrade_options.append(randomitem)
+		return randomitem
+	else:
+		return null

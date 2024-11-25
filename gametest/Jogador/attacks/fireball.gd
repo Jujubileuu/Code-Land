@@ -18,11 +18,29 @@ func _ready():
 	rotation = angle.angle() #+ deg_to_rad(135)
 	match level:
 		1:
+			healph = 1 #2 atravessa 1 inimigo e some no próximo
+			speed = 200
+			damage = 5
+			knockback_amount = 150
+			attack_size = 1.0 * (1 + player.spell_size)
+		2:
+			healph = 1 #2 atravessa 1 inimigo e some no próximo
+			speed = 200
+			damage = 5
+			knockback_amount = 150
+			attack_size = 1.0 * (1 + player.spell_size)
+		3:
 			healph = 2 #2 atravessa 1 inimigo e some no próximo
 			speed = 200
-			damage = 100
+			damage = 8
 			knockback_amount = 150
-			attack_size = 1.0
+			attack_size = 1.0 * (1 + player.spell_size)
+		4:
+			healph = 2 #2 atravessa 1 inimigo e some no próximo
+			speed = 200
+			damage = 8
+			knockback_amount = 150
+			attack_size = 1.0 * (1 + player.spell_size)
 	
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(1,1)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
