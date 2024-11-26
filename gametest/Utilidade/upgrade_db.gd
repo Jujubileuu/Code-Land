@@ -1,10 +1,10 @@
 extends Node
 
-const ICON_PATH = "res://arts/"
-const WEAPON_PATH = "res://arts/"
+const ICON_PATH = "res://Texturas/Items/Upgrades/"
+const WEAPON_PATH = "res://Texturas/Items/Weapons/"
 const UPGRADES = {
 	"fireball1": {
-		"icon": WEAPON_PATH + "gemas_roxa.png",
+		"icon": ICON_PATH + "refriAmarelo.png",
 		"display": "Fire Ball",
 		"details": "A ball of fire is thrown at a random enemy",
 		"level": "Level: 1",
@@ -12,7 +12,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"fireball2": {
-		"icon": WEAPON_PATH + "gemas_roxa.png",
+		"icon": ICON_PATH + "refriAmarelo.png",
 		"display": "Fire Ball",
 		"details": "A addition Fire Ball is thrown",
 		"level": "Level: 2",
@@ -20,7 +20,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"fireball3": {
-		"icon": WEAPON_PATH + "gemas_roxa.png",
+		"icon": ICON_PATH + "refriAmarelo.png",
 		"display": "Fire Ball",
 		"details": "Fire Ball now pass through another enemy and do +3 damage",
 		"level": "Level: 3",
@@ -28,7 +28,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"fireball4": {
-		"icon": WEAPON_PATH + "gemas_roxa.png",
+		"icon": ICON_PATH + "refriAmarelo.png",
 		"display": "Fire Ball",
 		"details": "An additional 2 Fire Ball are thrown",
 		"level": "Level: 4",
@@ -36,7 +36,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"armor1": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Armor",
 		"details": "Reduces damage by 1 point",
 		"level": "Level: 1",
@@ -44,7 +44,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"armor2": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Armor",
 		"details": "Reduces damage by an additional 1 point",
 		"level": "Level: 2",
@@ -52,7 +52,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"armor3": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Armor",
 		"details": "Reduces damage by an additional 1 point",
 		"level": "Level: 3",
@@ -60,7 +60,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"armor4": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Armor",
 		"details": "Reduces damage by an additional 1 point",
 		"level": "Level: 4",
@@ -68,7 +68,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"speed1": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Speed",
 		"details": "Movement speed increased by 50% of base speed",
 		"level": "Level: 1",
@@ -76,7 +76,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"speed2": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Speed",
 		"details": "Movement speed increased an addicional 50% of base speed",
 		"level": "Level: 2",
@@ -84,7 +84,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"speed3": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Speed",
 		"details": "Movement speed increased an addicional 50% of base speed",
 		"level": "Level: 3",
@@ -92,7 +92,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"speed4": {
-		"icon": WEAPON_PATH + "gema_verde.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Speed",
 		"details": "Movement speed increased an addicional 50% of base speed",
 		"level": "Level: 4",
@@ -100,7 +100,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"food": {
-		"icon": ICON_PATH + "gema_azul.png",
+		"icon": ICON_PATH + "refriVermelho.png",
 		"display": "Food",
 		"details": "Heals you for 20 health",
 		"level": "N/A",

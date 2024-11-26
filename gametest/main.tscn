@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cfdaaod72imwn"]
 
-[ext_resource type="Texture2D" uid="uid://be8apfmrug0se" path="res://Texturas/floor.png" id="1_hp54t"]
+[ext_resource type="Texture2D" uid="uid://be8apfmrug0se" path="res://Texturas/floor.png" id="1_d1hj3"]
 [ext_resource type="PackedScene" uid="uid://ctdv4apgops" path="res://Jogador/jogador.tscn" id="2_qaeij"]
 [ext_resource type="PackedScene" uid="uid://6i5rryhyg560" path="res://Utilidade/enemy_spawner.tscn" id="3_0hdki"]
 [ext_resource type="Script" path="res://Utilidade/spawn_info.gd" id="4_8gt27"]
@@ -20,7 +20,7 @@ enemy_spawn_delay = 0
 [node name="floor" type="Sprite2D" parent="."]
 texture_repeat = 2
 scale = Vector2(10, 10)
-texture = ExtResource("1_hp54t")
+texture = ExtResource("1_d1hj3")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
 
@@ -33,4 +33,5 @@ spawns = Array[ExtResource("4_8gt27")]([SubResource("Resource_vfyub")])
 
 [node name="ExperienceGem" parent="." instance=ExtResource("6_b6td2")]
 position = Vector2(530, -81)
+scale = Vector2(1.5, 1.5)
 experience = 50

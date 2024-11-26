@@ -61,6 +61,10 @@ func movement():
 		sprite.flip_h = false
 	elif mov.x < 0:
 		sprite.flip_h = true
+	if mov.y > 0:
+		sprite.region_rect = Rect2(512,0,32,31)
+	elif mov.y < 0:
+		sprite.region_rect = Rect2(0,0,32,31)
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
 

@@ -1,19 +1,19 @@
 [gd_scene load_steps=13 format=3 uid="uid://ctdv4apgops"]
 
-[ext_resource type="Texture2D" uid="uid://bt0f5ue14icj1" path="res://arts/characterSprite.png" id="1_qeky2"]
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
+[ext_resource type="Texture2D" uid="uid://dqr766v15debp" path="res://Texturas/Player/mainCharacter.png" id="2_kasje"]
 [ext_resource type="PackedScene" uid="uid://y8stf5kqtp5c" path="res://Utilidade/hurt_box.tscn" id="3_30451"]
-[ext_resource type="Texture2D" uid="uid://cdvxc4eylrdd" path="res://arts/exp_background - Copia.png" id="4_kdlwp"]
-[ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://arts/exp_progress - Copia.png" id="5_armqj"]
-[ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://arts/healthbar - Copia.png" id="6_x7xd8"]
-[ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://arts/health - Copia.png" id="7_t25b2"]
+[ext_resource type="Texture2D" uid="uid://cdvxc4eylrdd" path="res://Texturas/GUI/exp_background - Copia.png" id="4_kdlwp"]
+[ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://Texturas/GUI/exp_progress - Copia.png" id="5_armqj"]
+[ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://Texturas/GUI/healthbar - Copia.png" id="6_x7xd8"]
+[ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://Texturas/GUI/health - Copia.png" id="7_t25b2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_378vh"]
-radius = 64.0
-height = 138.0
+radius = 45.0
+height = 94.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewbeq"]
-radius = 68.2367
+radius = 49.0102
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37hqo"]
 radius = 1849.2
@@ -29,14 +29,17 @@ motion_mode = 1
 script = ExtResource("1_sqf12")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_qeky2")
+position = Vector2(10, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_kasje")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 31)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.2, 0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-38.5, -3)
 shape = SubResource("CapsuleShape2D_378vh")
 
 [node name="HurtBox" parent="." instance=ExtResource("3_30451")]
@@ -45,10 +48,10 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-38.5, -2)
 shape = SubResource("CircleShape2D_ewbeq")
 
 [node name="Attack" type="Node2D" parent="."]
+visible = false
 
 [node name="FireBallTimer" type="Timer" parent="Attack"]
 wait_time = 1.5
@@ -57,28 +60,30 @@ wait_time = 1.5
 wait_time = 0.075
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
-visible = false
 shape = SubResource("CircleShape2D_37hqo")
 
 [node name="GrabArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2(-45, 0)
 shape = SubResource("CircleShape2D_hqi1a")
 
 [node name="CollectArea" type="Area2D" parent="."]
+visible = false
+position = Vector2(-104, 81)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
-position = Vector2(-45, 0)
+position = Vector2(104, -82)
 shape = SubResource("CircleShape2D_xns4j")
 
 [node name="GUILayer" type="CanvasLayer" parent="."]

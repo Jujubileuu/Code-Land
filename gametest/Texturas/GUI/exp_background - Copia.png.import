@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt0f5ue14icj1"
-path="res://.godot/imported/characterSprite.png-1414e3a3721c7e66f969ecca11a89807.ctex"
+uid="uid://cdvxc4eylrdd"
+path="res://.godot/imported/exp_background - Copia.png-70ffb3e114d83ef737d1228eaa1bdcda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/characterSprite.png"
-dest_files=["res://.godot/imported/characterSprite.png-1414e3a3721c7e66f969ecca11a89807.ctex"]
+source_file="res://Texturas/GUI/exp_background - Copia.png"
+dest_files=["res://.godot/imported/exp_background - Copia.png-70ffb3e114d83ef737d1228eaa1bdcda.ctex"]
 
 [params]
 

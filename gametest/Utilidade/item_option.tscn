@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://ogjo7je6sqni"]
 
-[ext_resource type="Texture2D" uid="uid://nowcgdidm0ro" path="res://arts/gemas_roxa.png" id="1_jyhy4"]
 [ext_resource type="Script" path="res://Utilidade/item_option.gd" id="1_wepp7"]
+[ext_resource type="Texture2D" uid="uid://bo2vk4rkx8u60" path="res://Texturas/Items/Upgrades/refriAmarelo.png" id="2_0pc14"]
 
 [node name="ItemOption" type="ColorRect"]
-custom_minimum_size = Vector2(180, 50)
+custom_minimum_size = Vector2(180, 60)
 anchors_preset = -1
 anchor_right = 0.281
 anchor_bottom = 0.139
@@ -25,7 +25,7 @@ layout_mode = 0
 offset_right = 120.0
 offset_bottom = 120.0
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_jyhy4")
+texture = ExtResource("2_0pc14")
 
 [node name="lbl_name" type="Label" parent="."]
 layout_mode = 0

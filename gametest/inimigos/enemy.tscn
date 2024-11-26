@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dmyb2xu8eai0"]
 
 [ext_resource type="Script" path="res://inimigos/enemy.gd" id="1_phgxl"]
-[ext_resource type="Texture2D" uid="uid://bckd43fn1bukh" path="res://arts/Cobra.png" id="2_eqp7u"]
+[ext_resource type="Texture2D" uid="uid://cvvemvwtiyw6k" path="res://Texturas/Enemy/Cobra.png" id="2_lw3i2"]
 [ext_resource type="PackedScene" uid="uid://y8stf5kqtp5c" path="res://Utilidade/hurt_box.tscn" id="3_b2syd"]
 [ext_resource type="PackedScene" uid="uid://dponpppx0g8ou" path="res://Utilidade/hit_box.tscn" id="4_b80ii"]
 
@@ -24,7 +24,7 @@ script = ExtResource("1_phgxl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(17, -2)
 scale = Vector2(2.5, 4.27)
-texture = ExtResource("2_eqp7u")
+texture = ExtResource("2_lw3i2")
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

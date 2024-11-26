@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cje7f5tcv064x"
-path="res://.godot/imported/gema_verde.png-c6e479a0da91a79b92cd0b2c6a060117.ctex"
+uid="uid://cwebj83ndibnb"
+path="res://.godot/imported/healthbar - Copia.png-46e9d41d751bdc460fb67f3ae09fd1e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/gema_verde.png"
-dest_files=["res://.godot/imported/gema_verde.png-c6e479a0da91a79b92cd0b2c6a060117.ctex"]
+source_file="res://Texturas/GUI/healthbar - Copia.png"
+dest_files=["res://.godot/imported/healthbar - Copia.png-46e9d41d751bdc460fb67f3ae09fd1e6.ctex"]
 
 [params]
 

@@ -2,9 +2,7 @@ extends Area2D
 
 @export var experience = 1
 
-var spr_green = preload("res://arts/gema_verde.png")
-var spr_blue = preload("res://arts/gema_azul.png")
-var spr_purple = preload("res://arts/gemas_roxa.png")
+var base_green = preload("res://Texturas/Items/Gems/xpGem.png")
 
 var target = null
 var speed = -5
@@ -15,11 +13,11 @@ var speed = -5
 
 func _ready():
 	if experience < 5:
-		return
+		sprite.self_modulate = Color8(255,255,255,255)
 	elif experience < 25:
-		sprite.texture = spr_blue
-	else:
-		sprite.texture = spr_purple
+		sprite.self_modulate = Color8(255,0,0,255)
+	else: 
+		sprite.self_modulate = Color8(0,0,0,255)
 
 func _physics_process(delta):
 	if target != null:

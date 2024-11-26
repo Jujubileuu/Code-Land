@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7x5cucwuqxfl"]
 
-[ext_resource type="Texture2D" uid="uid://dkxo2vkrjpx7n" path="res://arts/EmptyItem - Copia.png" id="1_2sxxh"]
+[ext_resource type="Texture2D" uid="uid://dkxo2vkrjpx7n" path="res://Texturas/GUI/EmptyItem - Copia.png" id="1_2sxxh"]
 [ext_resource type="Script" path="res://Jogador/GUI/item_texture.gd" id="3_4h7xw"]
 
 [node name="ItemContainer" type="TextureRect"]
