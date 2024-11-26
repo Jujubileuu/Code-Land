@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmwal6o5ckl1x"]
 
-[ext_resource type="Texture2D" uid="uid://dayhh5q8shb4k" path="res://arts/5398538.jpg" id="1_5b2dg"]
 [ext_resource type="Script" path="res://Jogador/attacks/fireball.gd" id="1_lk46m"]
+[ext_resource type="Texture2D" uid="uid://cfwdv2plmq7rp" path="res://Texturas/Items/Weapons/fireBall.png" id="2_byb6k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfxbc"]
-size = Vector2(230, 65)
+size = Vector2(80, 70)
 
 [node name="Fireball" type="Area2D" groups=["attack"]]
 top_level = true
@@ -14,14 +14,15 @@ collision_mask = 0
 script = ExtResource("1_lk46m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_5b2dg")
-hframes = 2
-vframes = 3
-frame = 1
+position = Vector2(10, 30)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_byb6k")
+hframes = 7
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 32.5)
+position = Vector2(10, 35)
+scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_vfxbc")
 
 [node name="Timer" type="Timer" parent="."]

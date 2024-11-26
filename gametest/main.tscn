@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cfdaaod72imwn"]
 
-[ext_resource type="Texture2D" uid="uid://cchq735lmmxrp" path="res://arts/grassTexture.png" id="1_5l2pk"]
+[ext_resource type="Texture2D" uid="uid://be8apfmrug0se" path="res://Texturas/floor.png" id="1_hp54t"]
 [ext_resource type="PackedScene" uid="uid://ctdv4apgops" path="res://Jogador/jogador.tscn" id="2_qaeij"]
 [ext_resource type="PackedScene" uid="uid://6i5rryhyg560" path="res://Utilidade/enemy_spawner.tscn" id="3_0hdki"]
 [ext_resource type="Script" path="res://Utilidade/spawn_info.gd" id="4_8gt27"]
@@ -10,17 +10,17 @@
 [sub_resource type="Resource" id="Resource_vfyub"]
 script = ExtResource("4_8gt27")
 time_start = 0
-time_end = 60
+time_end = 500
 enemy = ExtResource("5_rmcho")
-enemy_num = 5
+enemy_num = 1
 enemy_spawn_delay = 0
 
 [node name="Main" type="Node2D"]
 
 [node name="floor" type="Sprite2D" parent="."]
 texture_repeat = 2
-scale = Vector2(2, 2)
-texture = ExtResource("1_5l2pk")
+scale = Vector2(10, 10)
+texture = ExtResource("1_hp54t")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
 

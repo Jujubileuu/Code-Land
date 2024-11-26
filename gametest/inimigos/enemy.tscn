@@ -24,7 +24,6 @@ script = ExtResource("1_phgxl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(17, -2)
 scale = Vector2(2.5, 4.27)
-skew = -0.205949
 texture = ExtResource("2_eqp7u")
 hframes = 3
 
