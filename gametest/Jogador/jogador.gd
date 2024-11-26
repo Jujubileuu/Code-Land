@@ -176,6 +176,12 @@ func upgrade_character(upgrade):
 		"fireball4":
 			fireball_level = 4
 			fireball_baseammo += 2
+		"fireball5":
+			fireball_level = 5
+			fireball_baseammo += 2
+		"fireball6":
+			fireball_level = 6
+			fireball_baseammo += 2
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":

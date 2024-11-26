@@ -35,6 +35,22 @@ const UPGRADES = {
 		"prerequisite": ["fireball3"],
 		"type": "weapon"
 	},
+	"fireball5": {
+		"icon": WEAPON_PATH + "gemas_roxa.png",
+		"display": "Fire Ball",
+		"details": "An additional 2 Fire Ball are thrown",
+		"level": "Level: 5",
+		"prerequisite": ["fireball4"],
+		"type": "weapon"
+	},
+	"fireball6": {
+		"icon": WEAPON_PATH + "gemas_roxa.png",
+		"display": "Fire Ball",
+		"details": "An additional 2 Fire Ball are thrown",
+		"level": "Level: 6",
+		"prerequisite": ["fireball5"],
+		"type": "weapon"
+	},
 	"armor1": {
 		"icon": WEAPON_PATH + "gema_verde.png",
 		"display": "Armor",
