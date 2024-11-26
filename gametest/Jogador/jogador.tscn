@@ -33,7 +33,7 @@ position = Vector2(10, 0)
 scale = Vector2(4, 4)
 texture = ExtResource("2_kasje")
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 31)
+region_rect = Rect2(512, 0, 32, 31)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.2, 0.2)
