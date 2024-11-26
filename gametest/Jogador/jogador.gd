@@ -1,4 +1,4 @@
-extends CharacterBody2D #21:04
+extends CharacterBody2D #12:30
 
 var movement_speed = 160.0
 var healph = 100
@@ -44,6 +44,11 @@ var enemy_close = []
 @onready var collectedUpgrades = get_node("%CollectedUpgrades")
 @onready var itemContainer = preload("res://Jogador/GUI/item_container.tscn")
 
+@onready var deathPanel = get_node("%DeathPanel")
+@onready var lblResult = get_node("%lbl_Result")
+@onready var sndVictory = get_node("%snd_victory")
+@onready var sndLose = get_node("%snd_lose")
+
 func _ready():
 	upgrade_character("fireball1")
 	attack()
@@ -78,6 +83,8 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 	healph -= clamp(damage-armor, 1.0, 999.00)
 	healthBar.max_value = maxhealph
 	healthBar.value = healph
+	if healph <= 0:
+		death()
 
 
 func _on_fire_ball_timer_timeout():
@@ -249,3 +256,17 @@ func change_time(argtime = 0):
 #					collectedWeapons.add_child(new_item)
 #				"upgrade":
 #					collectedUpgrades.add_child(new_item)
+
+func death():
+	deathPanel.visible = true
+	get_tree().paused = true
+	var tween = deathPanel.create_tween()
+	tween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.play()
+	if time >= 600:
+		lblResult.text = "SINTA-SE CODADO"
+		sndVictory.play()
+	else:
+		lblResult.text = "QUE BAGULHO EM..."
+		sndLose.play()
+	

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciaocokcky53"]
+
+[ext_resource type="Script" path="res://Utilidade/basic_button.gd" id="1_0gjvn"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(80, 30)
+offset_right = 8.0
+offset_bottom = 8.0
+text = "EXAMPLE"
+script = ExtResource("1_0gjvn")

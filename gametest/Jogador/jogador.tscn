@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=14 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
 [ext_resource type="Texture2D" uid="uid://dqr766v15debp" path="res://Texturas/Player/mainCharacter.png" id="2_kasje"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://Texturas/GUI/exp_progress - Copia.png" id="5_armqj"]
 [ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://Texturas/GUI/healthbar - Copia.png" id="6_x7xd8"]
 [ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://Texturas/GUI/health - Copia.png" id="7_t25b2"]
+[ext_resource type="PackedScene" uid="uid://ciaocokcky53" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_378vh"]
 radius = 45.0
@@ -127,6 +128,7 @@ texture_progress = ExtResource("7_t25b2")
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2
+visible = false
 layout_mode = 0
 offset_left = 800.0
 offset_top = 50.0
@@ -151,6 +153,38 @@ offset_bottom = 100.0
 
 [node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp"]
 unique_name_in_owner = true
+
+[node name="DeathPanel" type="Panel" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 0
+offset_left = 225.0
+offset_top = -273.0
+offset_right = 425.0
+offset_bottom = -23.0
+
+[node name="lbl_Result" type="Label" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "RESULTADO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+
+[node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+
+[node name="btn_menu" parent="GUILayer/GUI/DeathPanel" instance=ExtResource("8_ajqeu")]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 200.0
+offset_right = 140.0
+offset_bottom = 231.0
+text = "MENU"
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true
