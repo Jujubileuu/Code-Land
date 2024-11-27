@@ -17,8 +17,8 @@ size = Vector2(210, 115)
 
 [node name="enemy" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(3, 3)
-collision_layer = 17
-collision_mask = 17
+collision_layer = 16
+collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_w6q16")
 movement_speed = 100.0

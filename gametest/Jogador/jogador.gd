@@ -193,6 +193,8 @@ func upgrade_character(upgrade):
 			movement_speed += 20.0
 		"food":
 			healph += 20
+			if healph > maxhealph:
+				healph = 100
 			maxhealph = clamp(healph,0,maxhealph)
 	#adjust_gui_collection(upgrade)
 	attack()
