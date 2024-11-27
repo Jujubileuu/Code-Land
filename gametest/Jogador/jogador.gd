@@ -261,7 +261,7 @@ func death():
 	deathPanel.visible = true
 	get_tree().paused = true
 	var tween = deathPanel.create_tween()
-	tween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(deathPanel,"modulate",Color8(255,255,255,255),5).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 	if time >= 600:
 		lblResult.text = "SINTA-SE CODADO"
