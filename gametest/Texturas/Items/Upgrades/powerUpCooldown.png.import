@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db3q8fabhhygc"
-path="res://.godot/imported/refriVermelho.png-7b646f27c1f120aa8da6b61812166ef1.ctex"
+uid="uid://ckmkqgyo4jgq6"
+path="res://.godot/imported/powerUpCooldown.png-ecfd566d16fc4eff134fc5ce52e5187d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Texturas/Items/Upgrades/refriVermelho.png"
-dest_files=["res://.godot/imported/refriVermelho.png-7b646f27c1f120aa8da6b61812166ef1.ctex"]
+source_file="res://Texturas/Items/Upgrades/powerUpCooldown.png"
+dest_files=["res://.godot/imported/powerUpCooldown.png-ecfd566d16fc4eff134fc5ce52e5187d.ctex"]
 
 [params]
 

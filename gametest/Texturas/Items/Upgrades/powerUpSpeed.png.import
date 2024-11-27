@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bo2vk4rkx8u60"
-path="res://.godot/imported/refriAmarelo.png-2d7e5ab88f36113a67b97670e73b0845.ctex"
+path="res://.godot/imported/powerUpSpeed.png-10202416e1644a5242379ebef285f4b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Texturas/Items/Upgrades/refriAmarelo.png"
-dest_files=["res://.godot/imported/refriAmarelo.png-2d7e5ab88f36113a67b97670e73b0845.ctex"]
+source_file="res://Texturas/Items/Upgrades/powerUpSpeed.png"
+dest_files=["res://.godot/imported/powerUpSpeed.png-10202416e1644a5242379ebef285f4b1.ctex"]
 
 [params]
 

@@ -191,6 +191,10 @@ func upgrade_character(upgrade):
 			armor += 1
 		"speed1","speed2","speed3","speed4":
 			movement_speed += 20.0
+		"Cooldown1","Cooldown2","Cooldown3","Cooldown4":
+			spell_cooldown += 0.1
+		"AttackSize1","AttackSize2","AttackSize3","AttackSize4":
+			spell_size += 0.15
 		"food":
 			healph += 20
 			if healph > maxhealph:

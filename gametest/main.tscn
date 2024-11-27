@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cfdaaod72imwn"]
+[gd_scene load_steps=29 format=3 uid="uid://cfdaaod72imwn"]
 
 [ext_resource type="Texture2D" uid="uid://be8apfmrug0se" path="res://Texturas/floor.png" id="1_d1hj3"]
 [ext_resource type="PackedScene" uid="uid://ctdv4apgops" path="res://Jogador/jogador.tscn" id="2_qaeij"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dmyb2xu8eai0" path="res://inimigos/enemy_cobra.tscn" id="5_rmcho"]
 [ext_resource type="PackedScene" uid="uid://mwu7wly7ervc" path="res://inimigos/enemy_besouro.tscn" id="5_xo8u5"]
 [ext_resource type="PackedScene" uid="uid://bhxlxpayvjwsc" path="res://inimigos/enemy_fumaca.tscn" id="5_xytwv"]
+[ext_resource type="PackedScene" uid="uid://1fhtuts27qw0" path="res://Objects/experience_gem.tscn" id="6_b6td2"]
 [ext_resource type="PackedScene" uid="uid://dbg5alck2ibpd" path="res://inimigos/boss_css.tscn" id="7_udg3w"]
 [ext_resource type="PackedScene" uid="uid://ce1ct6j82r80n" path="res://inimigos/boss_javascript.tscn" id="10_366io"]
 
@@ -155,3 +156,6 @@ region_rect = Rect2(0, 0, 4000, 4000)
 spawns = Array[ExtResource("4_8gt27")]([SubResource("Resource_4d0jm"), SubResource("Resource_mwua5"), SubResource("Resource_iif5k"), SubResource("Resource_5wp68"), SubResource("Resource_6jmri"), SubResource("Resource_2m21t"), SubResource("Resource_ph65f"), SubResource("Resource_7wjsu"), SubResource("Resource_7362a"), SubResource("Resource_w67fo"), SubResource("Resource_vrxrm"), SubResource("Resource_xxqf3"), SubResource("Resource_1fgbl"), SubResource("Resource_p3mqa"), SubResource("Resource_wgnpf"), SubResource("Resource_jk56f")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="ExperienceGem" parent="." instance=ExtResource("6_b6td2")]
+experience = 50
