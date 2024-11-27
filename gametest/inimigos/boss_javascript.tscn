@@ -19,8 +19,8 @@ height = 364.417
 
 [node name="enemy" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
-collision_layer = 5
-collision_mask = 5
+collision_layer = 17
+collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_yiodh")
 movement_speed = 120.0
