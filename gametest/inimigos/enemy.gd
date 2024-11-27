@@ -11,6 +11,7 @@ var knockback = Vector2.ZERO
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var hitBox = $HitBox
+@onready var critic = get_node("res://Jogador/jogador.tscn")
 
 var death_anim = preload("res://inimigos/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
@@ -45,7 +46,11 @@ func death():
 	queue_free()
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
-	healph -= damage
+	var rand = RandomNumberGenerator.new().randi_range(0,10)
+	if rand <= UpgradeDb.critic_chance:
+		healph -= damage*2
+	else:
+		healph -= damage
 	knockback = angle * knockback_amount
 	if healph <= 0:
 		death()

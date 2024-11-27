@@ -1,5 +1,6 @@
 extends Node
 
+var critic_chance = 0
 const ICON_PATH = "res://Texturas/Items/Upgrades/"
 const WEAPON_PATH = "res://Texturas/Items/Weapons/"
 const UPGRADES = {

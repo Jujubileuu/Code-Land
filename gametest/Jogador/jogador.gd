@@ -21,7 +21,6 @@ var spell_cooldown = 0
 var spell_size = 0
 var additional_attacks = 0
 
-
 var fireball_ammo = 0
 var fireball_baseammo = 0
 var fireball_attackspeed = 1.5
@@ -155,7 +154,7 @@ func calculate_experiencecap():
 		exp_cap = 255 + (experience_level-39)*12
 	return exp_cap
 
-func set_bar(set_value = 1, set_max_value = 100):
+func set_bar(set_value = 1, set_max_value = maxhealph):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
 
@@ -195,6 +194,11 @@ func upgrade_character(upgrade):
 			spell_cooldown += 0.1
 		"AttackSize1","AttackSize2","AttackSize3","AttackSize4":
 			spell_size += 0.15
+		"MaxHealth1","MaxHealth2","MaxHealth3","MaxHealth4":
+			maxhealph += 15
+			healthBar.max_value = maxhealph
+		"Critic1","Critic2","Critic3","Critic4":
+			UpgradeDb.critic_chance += 1
 		"food":
 			healph += 20
 			if healph > maxhealph:
@@ -275,4 +279,7 @@ func death():
 	else:
 		lblResult.text = "QUE BAGULHO EM..."
 		sndLose.play()
-	
+
+func _on_btn_menu_pressed():
+	get_tree().paused = false
+	var _level = get_tree().change_scene_to_file("res://MenuScreen/menu.tscn")
