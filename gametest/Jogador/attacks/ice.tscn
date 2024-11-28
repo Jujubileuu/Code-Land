@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dki5fnirscl8k"]
+
+[ext_resource type="Script" path="res://Jogador/attacks/fireball.gd" id="1_a1c21"]
+[ext_resource type="Texture2D" uid="uid://b38tyfsflr45a" path="res://Texturas/Items/Weapons/ice.png" id="2_6g8wt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfxbc"]
+size = Vector2(45, 40)
+
+[node name="Ice" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_a1c21")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(13.125, 30)
+scale = Vector2(2.73148, 2.5)
+texture = ExtResource("2_6g8wt")
+hframes = 7
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(22.5, 30)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_vfxbc")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

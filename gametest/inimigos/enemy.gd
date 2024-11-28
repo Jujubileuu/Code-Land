@@ -1,18 +1,24 @@
 extends CharacterBody2D
 
-@export var movement_speed = 50.0
-@export var healph = 100
+@export var movement_speed = 60.0
+@export var healph = 10
 @export var knockback_recovery = 3.5
+@export var enemy_damage = 1
 @export var experience = 1
 var knockback = Vector2.ZERO
+
 @onready var sprite = $Sprite2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
+@onready var hitBox = $HitBox
 
 var death_anim = preload("res://inimigos/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
 
 signal remove_from_array(object)
+
+func _ready():
+	hitBox.damage = enemy_damage
 
 func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
@@ -29,7 +35,7 @@ func _physics_process(_delta):
 func death():
 	emit_signal("remove_from_array", self)
 	var enemy_death = death_anim.instantiate()
-	enemy_death.scale = sprite.scale/10
+	enemy_death.scale = sprite.scale*2
 	enemy_death.global_position = global_position
 	get_parent().call_deferred("add_child", enemy_death)
 	var new_gem = exp_gem.instantiate()

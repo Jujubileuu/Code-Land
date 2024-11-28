@@ -21,41 +21,29 @@ func _ready():
 			healph = 1 #2 atravessa 1 inimigo e some no próximo
 			speed = 200
 			damage = 5
-			knockback_amount = 50
-			attack_size = 0.25 * (1 + player.spell_size)
+			knockback_amount = 150
+			attack_size = 1.0 * (1 + player.spell_size)
 		2:
 			healph = 1 #2 atravessa 1 inimigo e some no próximo
-			speed = 225
-			damage = 10
-			knockback_amount = 100
-			attack_size = 0.50 * (1 + player.spell_size)
+			speed = 200
+			damage = 5
+			knockback_amount = 150
+			attack_size = 1.0 * (1 + player.spell_size)
 		3:
 			healph = 2 #2 atravessa 1 inimigo e some no próximo
-			speed = 250
-			damage = 15
+			speed = 200
+			damage = 8
 			knockback_amount = 150
-			attack_size = 0.75 * (1 + player.spell_size)
+			attack_size = 1.0 * (1 + player.spell_size)
 		4:
 			healph = 2 #2 atravessa 1 inimigo e some no próximo
-			speed = 275
-			damage = 20
-			knockback_amount = 200
+			speed = 200
+			damage = 8
+			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
-		5:
-			healph = 3 #2 atravessa 1 inimigo e some no próximo
-			speed = 300
-			damage = 25
-			knockback_amount = 250
-			attack_size = 1.25 * (1 + player.spell_size)
-		6:
-			healph = 3 #2 atravessa 1 inimigo e some no próximo
-			speed = 325
-			damage = 30
-			knockback_amount = 300
-			attack_size = 1.50 * (1 + player.spell_size)
 	
 	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(1,1)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", Vector2(2,2)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 
 func _physics_process(delta):

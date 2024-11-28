@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Utilidade/enemy_spawner.gd" id="1_xkfip"]
 [ext_resource type="Script" path="res://Utilidade/spawn_info.gd" id="2_i2cy8"]
-[ext_resource type="PackedScene" uid="uid://dmyb2xu8eai0" path="res://inimigos/enemy.tscn" id="3_cge83"]
+[ext_resource type="PackedScene" uid="uid://dmyb2xu8eai0" path="res://inimigos/enemy_cobra.tscn" id="3_cge83"]
 
 [sub_resource type="Resource" id="Resource_u6isd"]
 script = ExtResource("2_i2cy8")

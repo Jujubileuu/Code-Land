@@ -1,17 +1,25 @@
-extends CharacterBody2D #21:04
+extends CharacterBody2D #12:30
 
 var movement_speed = 160.0
 var healph = 100
 var maxhealph = 100
 var time = 0
-
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
+var last_movement = Vector2.UP
 
 var fireBall = preload("res://Jogador/attacks/fireball.tscn")
+var ice_spear = preload("res://Jogador/attacks/ice.tscn")
+var tornado = preload("res://Jogador/attacks/tornado.tscn")
+
 @onready var fireBallTimer = get_node("Attack/FireBallTimer")
 @onready var fireBallAttackTimer = get_node("Attack/FireBallTimer/FireBallAttackTimer")
+
+
+@onready var TornadoTimer = get_node("%TornadoTimer")
+@onready var TireBallAttackTimer = get_node("%TornadoAttackTimer")
+
 
 var collected_upgrades = []
 var upgrade_options = []
@@ -22,10 +30,15 @@ var spell_size = 0
 var additional_attacks = 0
 
 
-var fireball_ammo = 0
-var fireball_baseammo = 0
+var fireball_ammo = 1
+var fireball_baseammo = 1
 var fireball_attackspeed = 1.5
-var fireball_level = 0
+var fireball_level = 1
+
+var tornado_ammo = 0
+var tornado_baseammo = 1
+var tornado_attackspeed = 3
+var tornado_level = 1
 
 var enemy_close = []
 
@@ -44,8 +57,13 @@ var enemy_close = []
 @onready var collectedUpgrades = get_node("%CollectedUpgrades")
 @onready var itemContainer = preload("res://Jogador/GUI/item_container.tscn")
 
+@onready var deathPanel = get_node("%DeathPanel")
+@onready var lblResult = get_node("%lbl_Result")
+@onready var sndVictory = get_node("%snd_victory")
+@onready var sndLose = get_node("%snd_lose")
+
 func _ready():
-	upgrade_character("fireball1")
+	upgrade_character("ice_spear")
 	attack()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
@@ -61,19 +79,32 @@ func movement():
 		sprite.flip_h = false
 	elif mov.x < 0:
 		sprite.flip_h = true
+	if mov.y > 0:
+		sprite.region_rect = Rect2(512,0,32,31)
+	elif mov.y < 0:
+		sprite.region_rect = Rect2(0,0,32,31)
+	if mov != Vector2.ZERO:
+		last_movement = mov
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
+	
 
 func attack():
 	if fireball_level > 0:
 		fireBallTimer.wait_time = fireball_attackspeed * (1-spell_cooldown)
 		if fireBallTimer.is_stopped():
 			fireBallTimer.start()
+	if tornado_level > 0:
+		TornadoTimer.wait_time = tornado_attackspeed * (1-spell_cooldown)
+		if TornadoTimer.is_stopped():
+			TornadoTimer.start()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	healph -= clamp(damage-armor, 1.0, 999.00)
 	healthBar.max_value = maxhealph
 	healthBar.value = healph
+	if healph <= 0:
+		death()
 
 
 func _on_fire_ball_timer_timeout():
@@ -83,7 +114,7 @@ func _on_fire_ball_timer_timeout():
 
 func _on_fire_ball_attack_timer_timeout():
 	if fireball_ammo > 0:
-		var fireball_attack = fireBall.instantiate()
+		var fireball_attack = ice_spear.instantiate()
 		fireball_attack.position = position
 		fireball_attack.target = get_random_target()
 		fireball_attack.level = fireball_level
@@ -93,6 +124,20 @@ func _on_fire_ball_attack_timer_timeout():
 			fireBallAttackTimer.start()
 		else:
 			fireBallAttackTimer.stop()
+			
+func _on_tornado_timer_timeout():
+	tornado_ammo += tornado_baseammo + additional_attacks
+	
+
+func _on_tornado_attack_timer_timeout():
+	if tornado_ammo > 0:
+		var tornado_attack = tornado.instantiate()
+		tornado_attack.position = position
+		tornado_attack.last_movement = last_movement
+		tornado_attack.level = tornado_level
+		add_child(tornado_attack)
+		tornado_ammo -= 1
+
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -176,18 +221,18 @@ func upgrade_character(upgrade):
 		"fireball4":
 			fireball_level = 4
 			fireball_baseammo += 2
-		"fireball5":
-			fireball_level = 5
-			fireball_baseammo += 2
-		"fireball6":
-			fireball_level = 6
-			fireball_baseammo += 2
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
 			movement_speed += 20.0
+		"Cooldown1","Cooldown2","Cooldown3","Cooldown4":
+			spell_cooldown += 0.1
+		"AttackSize1","AttackSize2","AttackSize3","AttackSize4":
+			spell_size += 0.15
 		"food":
 			healph += 20
+			if healph > maxhealph:
+				healph = 100
 			maxhealph = clamp(healph,0,maxhealph)
 	#adjust_gui_collection(upgrade)
 	attack()
@@ -251,3 +296,17 @@ func change_time(argtime = 0):
 #					collectedWeapons.add_child(new_item)
 #				"upgrade":
 #					collectedUpgrades.add_child(new_item)
+
+func death():
+	deathPanel.visible = true
+	get_tree().paused = true
+	var tween = deathPanel.create_tween()
+	tween.tween_property(deathPanel,"modulate",Color8(255,255,255,255),5).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.play()
+	if time >= 600:
+		lblResult.text = "SINTA-SE CODADO"
+		sndVictory.play()
+	else:
+		lblResult.text = "QUE BAGULHO EM..."
+		sndLose.play()
+	

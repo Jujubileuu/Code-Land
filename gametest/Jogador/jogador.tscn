@@ -1,19 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=15 format=3 uid="uid://ctdv4apgops"]
 
-[ext_resource type="Texture2D" uid="uid://bt0f5ue14icj1" path="res://arts/characterSprite.png" id="1_qeky2"]
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
+[ext_resource type="Texture2D" uid="uid://dqr766v15debp" path="res://Texturas/Player/mainCharacter.png" id="2_kasje"]
 [ext_resource type="PackedScene" uid="uid://y8stf5kqtp5c" path="res://Utilidade/hurt_box.tscn" id="3_30451"]
-[ext_resource type="Texture2D" uid="uid://cdvxc4eylrdd" path="res://arts/exp_background - Copia.png" id="4_kdlwp"]
-[ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://arts/exp_progress - Copia.png" id="5_armqj"]
-[ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://arts/healthbar - Copia.png" id="6_x7xd8"]
-[ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://arts/health - Copia.png" id="7_t25b2"]
+[ext_resource type="Texture2D" uid="uid://cdvxc4eylrdd" path="res://Texturas/GUI/exp_background - Copia.png" id="4_kdlwp"]
+[ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://Texturas/GUI/exp_progress - Copia.png" id="5_armqj"]
+[ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://Texturas/GUI/healthbar - Copia.png" id="6_x7xd8"]
+[ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://Texturas/GUI/health - Copia.png" id="7_t25b2"]
+[ext_resource type="PackedScene" uid="uid://ciaocokcky53" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
+[ext_resource type="Texture2D" uid="uid://cv0o8a1evnf6c" path="res://Texturas/gameover.png" id="8_li8jj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_378vh"]
-radius = 64.0
-height = 138.0
+radius = 45.0
+height = 94.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewbeq"]
-radius = 68.2367
+radius = 49.0102
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37hqo"]
 radius = 1849.2
@@ -29,14 +31,17 @@ motion_mode = 1
 script = ExtResource("1_sqf12")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_qeky2")
+position = Vector2(10, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_kasje")
+region_enabled = true
+region_rect = Rect2(512, 0, 32, 31)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.2, 0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-38.5, -3)
 shape = SubResource("CapsuleShape2D_378vh")
 
 [node name="HurtBox" parent="." instance=ExtResource("3_30451")]
@@ -45,10 +50,10 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-38.5, -2)
 shape = SubResource("CircleShape2D_ewbeq")
 
 [node name="Attack" type="Node2D" parent="."]
+visible = false
 
 [node name="FireBallTimer" type="Timer" parent="Attack"]
 wait_time = 1.5
@@ -56,29 +61,39 @@ wait_time = 1.5
 [node name="FireBallAttackTimer" type="Timer" parent="Attack/FireBallTimer"]
 wait_time = 0.075
 
+[node name="TornadoTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="TornadoAttackTimer" type="Timer" parent="Attack/TornadoTimer"]
+unique_name_in_owner = true
+wait_time = 0.2
+
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
-visible = false
 shape = SubResource("CircleShape2D_37hqo")
 
 [node name="GrabArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2(-45, 0)
 shape = SubResource("CircleShape2D_hqi1a")
 
 [node name="CollectArea" type="Area2D" parent="."]
+visible = false
+position = Vector2(-104, 81)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
-position = Vector2(-45, 0)
+position = Vector2(104, -82)
 shape = SubResource("CircleShape2D_xns4j")
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
@@ -122,6 +137,7 @@ texture_progress = ExtResource("7_t25b2")
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2
+visible = false
 layout_mode = 0
 offset_left = 800.0
 offset_top = 50.0
@@ -146,6 +162,46 @@ offset_bottom = 100.0
 
 [node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp"]
 unique_name_in_owner = true
+
+[node name="DeathPanel" type="Panel" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/DeathPanel"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("8_li8jj")
+
+[node name="lbl_Result" type="Label" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 35.0
+offset_right = 640.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 30
+text = "RESULTADO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+
+[node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+
+[node name="btn_menu" parent="GUILayer/GUI/DeathPanel" instance=ExtResource("8_ajqeu")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 180.0
+offset_right = 360.0
+offset_bottom = 211.0
+text = "MENU"
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true
@@ -179,6 +235,8 @@ columns = 10
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/FireBallTimer" to="." method="_on_fire_ball_timer_timeout"]
 [connection signal="timeout" from="Attack/FireBallTimer/FireBallAttackTimer" to="." method="_on_fire_ball_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
