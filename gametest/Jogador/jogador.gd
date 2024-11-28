@@ -12,13 +12,19 @@ var last_movement = Vector2.UP
 var fireBall = preload("res://Jogador/attacks/fireball.tscn")
 var ice_spear = preload("res://Jogador/attacks/ice.tscn")
 var tornado = preload("res://Jogador/attacks/tornado.tscn")
+var thunder = preload("res://Jogador/attacks/thunder.gd")
 
-@onready var fireBallTimer = get_node("Attack/FireBallTimer")
-@onready var fireBallAttackTimer = get_node("Attack/FireBallTimer/FireBallAttackTimer")
+@onready var fireBallTimer = get_node("%FireBallTimer")
+@onready var fireBallAttackTimer = get_node("%FireBallAttackTimer")
 
+@onready var IceTimer = get_node("%IceTimer")
+@onready var IceAttackTimer = get_node("%IceAttackTimer")
+
+@onready var ThunderTimer = get_node("%ThunderTimer")
+@onready var ThunderAttackTimer = get_node("%ThunderAttackTimer")
 
 @onready var TornadoTimer = get_node("%TornadoTimer")
-@onready var TireBallAttackTimer = get_node("%TornadoAttackTimer")
+@onready var TornadoAttackTimer = get_node("%TornadoAttackTimer")
 
 
 var collected_upgrades = []
@@ -35,7 +41,17 @@ var fireball_baseammo = 1
 var fireball_attackspeed = 1.5
 var fireball_level = 1
 
-var tornado_ammo = 0
+var ice_ammo = 1
+var ice_baseammo = 1
+var ice_attackspeed = 1.5
+var ice_level = 1
+
+var thunder_ammo = 1
+var thunder_baseammo = 1
+var thunder_attackspeed = 1.5
+var thunder_level = 1
+
+var tornado_ammo = 1
 var tornado_baseammo = 1
 var tornado_attackspeed = 3
 var tornado_level = 1
@@ -63,7 +79,7 @@ var enemy_close = []
 @onready var sndLose = get_node("%snd_lose")
 
 func _ready():
-	upgrade_character("ice_spear")
+	upgrade_character("fireball1")
 	attack()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
@@ -94,10 +110,22 @@ func attack():
 		fireBallTimer.wait_time = fireball_attackspeed * (1-spell_cooldown)
 		if fireBallTimer.is_stopped():
 			fireBallTimer.start()
+func attack1():
 	if tornado_level > 0:
 		TornadoTimer.wait_time = tornado_attackspeed * (1-spell_cooldown)
 		if TornadoTimer.is_stopped():
 			TornadoTimer.start()
+func attack2():
+	if thunder_level > 0:
+		ThunderTimer.wait_time = thunder_attackspeed * (1-spell_cooldown)
+		if ThunderTimer.is_stopped():
+			ThunderTimer.start()
+func attack3():			
+	if ice_level >= 0:
+		IceTimer.wait_time = ice_attackspeed * (1-spell_cooldown)
+		if IceTimer.is_stopped():
+			IceTimer.start()
+	
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	healph -= clamp(damage-armor, 1.0, 999.00)
@@ -114,7 +142,7 @@ func _on_fire_ball_timer_timeout():
 
 func _on_fire_ball_attack_timer_timeout():
 	if fireball_ammo > 0:
-		var fireball_attack = ice_spear.instantiate()
+		var fireball_attack = fireBall.instantiate()
 		fireball_attack.position = position
 		fireball_attack.target = get_random_target()
 		fireball_attack.level = fireball_level
@@ -124,10 +152,23 @@ func _on_fire_ball_attack_timer_timeout():
 			fireBallAttackTimer.start()
 		else:
 			fireBallAttackTimer.stop()
-			
+func _on_ice_attack_timer_timeout():
+	if ice_ammo > 0:
+		var ice_attack = IceTimer.instantiate()
+		ice_attack.position = position
+		ice_attack.target = get_random_target()
+		ice_attack.level = ice_level
+		add_child(ice_attack)
+		ice_ammo -= 1
+		if ice_ammo > 0:
+			IceAttackTimer.start()
+		else:
+			IceAttackTimer.stop()	
+	
+
 func _on_tornado_timer_timeout():
 	tornado_ammo += tornado_baseammo + additional_attacks
-	
+	TornadoAttackTimer.start()
 
 func _on_tornado_attack_timer_timeout():
 	if tornado_ammo > 0:
@@ -137,14 +178,16 @@ func _on_tornado_attack_timer_timeout():
 		tornado_attack.level = tornado_level
 		add_child(tornado_attack)
 		tornado_ammo -= 1
-
+		if tornado_ammo > 0:
+			TornadoAttackTimer.start()
+		else:
+			TornadoAttackTimer.stop()
 
 func get_random_target():
 	if enemy_close.size() > 0:
 		return enemy_close.pick_random().global_position
 	else:
 		return Vector2.UP
-
 
 func _on_enemy_detection_area_body_entered(body):
 	if not enemy_close.has(body):

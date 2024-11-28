@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dki5fnirscl8k"]
+[gd_scene load_steps=4 format=3 uid="uid://hlxhachvanty"]
 
-[ext_resource type="Script" path="res://Jogador/attacks/fireball.gd" id="1_a1c21"]
-[ext_resource type="Texture2D" uid="uid://cgf2q3y4vyufq" path="res://Texturas/Items/ataqueneve.png" id="2_kkmco"]
+[ext_resource type="Script" path="res://Jogador/attacks/fireball.gd" id="1_0e70q"]
+[ext_resource type="Texture2D" uid="uid://dqojeeohhvgjm" path="res://Texturas/Items/Weapons/lightningAttack.png" id="2_pf06u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfxbc"]
 size = Vector2(50, 60.0001)
@@ -11,14 +11,14 @@ top_level = true
 scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_a1c21")
+script = ExtResource("1_0e70q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(13.125, 30)
 scale = Vector2(2.73148, 2.5)
-texture = ExtResource("2_kkmco")
-hframes = 4
-frame = 3
+texture = ExtResource("2_pf06u")
+hframes = 5
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(25, 30)

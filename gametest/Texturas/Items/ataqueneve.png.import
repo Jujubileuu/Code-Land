@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b38tyfsflr45a"
-path="res://.godot/imported/ice.png-6e1ddf5984b2d0b186026423940436ea.ctex"
+uid="uid://cgf2q3y4vyufq"
+path="res://.godot/imported/ataqueneve.png-da2dd44dc2217ad5ded1171a26e9786b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Texturas/Items/Weapons/ice.png"
-dest_files=["res://.godot/imported/ice.png-6e1ddf5984b2d0b186026423940436ea.ctex"]
+source_file="res://Texturas/Items/ataqueneve.png"
+dest_files=["res://.godot/imported/ataqueneve.png-da2dd44dc2217ad5ded1171a26e9786b.ctex"]
 
 [params]
 

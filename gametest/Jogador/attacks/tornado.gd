@@ -2,7 +2,7 @@ extends Area2D
 
 var level = 1
 var hp = 9999
-var speed = 100.0
+var speed = 300.0
 var damage = 5
 var attack_size = 1.0
 var knockback_amount = 100
@@ -19,29 +19,29 @@ signal remove_from_array(object)
 func _ready():
 	match level:
 		1:
-			hp = 9999
-			speed = 100.0
-			damage = 5
+			hp = 10
+			speed = 200.0
+			damage = 10
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
-			hp = 9999
-			speed = 100.0
-			damage = 5
-			knockback_amount = 100
-			attack_size = 1.0 * (1 + player.spell_size)
+			hp = 20
+			speed = 300.0
+			damage = 20
+			knockback_amount = 150
+			attack_size = 2.0 * (1 + player.spell_size)
 		3:
-			hp = 9999
-			speed = 100.0
-			damage = 5
-			knockback_amount = 100
-			attack_size = 1.0 * (1 + player.spell_size)
+			hp = 30
+			speed = 350.0
+			damage = 30
+			knockback_amount = 200
+			attack_size = 3.0 * (1 + player.spell_size)
 		4:
-			hp = 9999
-			speed = 100.0
-			damage = 5
-			knockback_amount = 125
-			attack_size = 1.0 * (1 + player.spell_size)
+			hp = 40
+			speed = 350.0
+			damage = 40
+			knockback_amount = 250
+			attack_size = 4.0 * (1 + player.spell_size)
 
 			
 	var move_to_less = Vector2.ZERO
@@ -63,7 +63,7 @@ func _ready():
 	var initital_tween = create_tween().set_parallel(true)
 	initital_tween.tween_property(self,"scale",Vector2(1,1)*attack_size,3).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	var final_speed = speed
-	speed = speed/5.0
+	speed = speed/5
 	initital_tween.tween_property(self,"speed",final_speed,6).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	initital_tween.play()
 	

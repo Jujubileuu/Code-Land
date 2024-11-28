@@ -56,9 +56,11 @@ shape = SubResource("CircleShape2D_ewbeq")
 visible = false
 
 [node name="FireBallTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
 wait_time = 1.5
 
 [node name="FireBallAttackTimer" type="Timer" parent="Attack/FireBallTimer"]
+unique_name_in_owner = true
 wait_time = 0.075
 
 [node name="TornadoTimer" type="Timer" parent="Attack"]
@@ -68,6 +70,20 @@ wait_time = 3.0
 [node name="TornadoAttackTimer" type="Timer" parent="Attack/TornadoTimer"]
 unique_name_in_owner = true
 wait_time = 0.2
+
+[node name="IceTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 2.0
+
+[node name="IceAttackTimer" type="Timer" parent="Attack/IceTimer"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="ThunderTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="ThunderAttackTimer" type="Timer" parent="Attack/ThunderTimer"]
+unique_name_in_owner = true
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 visible = false

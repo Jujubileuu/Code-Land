@@ -1,24 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://ylt0uk8d42p6"]
 
-[ext_resource type="Script" path="res://Jogador/attacks/fireball.gd" id="1_k4753"]
-[ext_resource type="Texture2D" uid="uid://cfwdv2plmq7rp" path="res://Texturas/Items/Weapons/fireBall.png" id="2_yd8ba"]
+[ext_resource type="Script" path="res://Jogador/attacks/tornado.gd" id="1_v8n7y"]
+[ext_resource type="Texture2D" uid="uid://bkkabrl0bpe2d" path="res://Texturas/Items/ataquetornado.png" id="2_3nkb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfxbc"]
-size = Vector2(80, 70)
+size = Vector2(60.0001, 70)
 
-[node name="Fireball" type="Area2D" groups=["attack"]]
+[node name="tornado" type="Area2D" groups=["attack"]]
 top_level = true
 scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_k4753")
+script = ExtResource("1_v8n7y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(10, 30)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource("2_yd8ba")
-hframes = 7
-frame = 3
+texture = ExtResource("2_3nkb3")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 31)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 35)
