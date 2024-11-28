@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmyb2xu8eai0"]
+[gd_scene load_steps=11 format=3 uid="uid://dmyb2xu8eai0"]
 
 [ext_resource type="Script" path="res://inimigos/enemy.gd" id="1_phgxl"]
 [ext_resource type="Texture2D" uid="uid://cvvemvwtiyw6k" path="res://Texturas/Enemy/Cobra.png" id="2_lw3i2"]
@@ -14,6 +14,43 @@ size = Vector2(63.75, 104.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x80vp"]
 size = Vector2(63.75, 104)
+
+[sub_resource type="Animation" id="Animation_1o841"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_closc"]
+resource_name = "walk"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_os27p"]
+_data = {
+"RESET": SubResource("Animation_1o841"),
+"walk": SubResource("Animation_closc")
+}
 
 [node name="enemy" type="CharacterBody2D" groups=["player"]]
 collision_layer = 5
@@ -48,6 +85,11 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(16.125, -4)
 shape = SubResource("RectangleShape2D_x80vp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_os27p")
+}
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

@@ -13,6 +13,7 @@ var knockback = Vector2.ZERO
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var hitBox = $HitBox
+@onready var anim = $AnimationPlayer
 @onready var critic = get_node("res://Jogador/jogador.tscn")
 
 var death_anim = preload("res://inimigos/explosion.tscn")
@@ -31,6 +32,7 @@ func _physics_process(_delta):
 	velocity = direction * movement_speed
 	velocity += knockback
 	move_and_slide()
+	anim.play("walk")
 	
 	if direction.x > 0:
 		sprite.flip_h = true

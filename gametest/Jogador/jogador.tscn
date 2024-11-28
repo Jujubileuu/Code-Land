@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=19 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
-[ext_resource type="Texture2D" uid="uid://dqr766v15debp" path="res://Texturas/Player/mainCharacter.png" id="2_kasje"]
+[ext_resource type="Texture2D" uid="uid://46ohgi2wredc" path="res://Texturas/Player/playerSprite.png" id="2_rebg4"]
 [ext_resource type="PackedScene" uid="uid://y8stf5kqtp5c" path="res://Utilidade/hurt_box.tscn" id="3_30451"]
 [ext_resource type="Texture2D" uid="uid://cdvxc4eylrdd" path="res://Texturas/GUI/exp_background - Copia.png" id="4_kdlwp"]
 [ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://Texturas/GUI/exp_progress - Copia.png" id="5_armqj"]
@@ -26,16 +26,73 @@ radius = 300.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_xns4j"]
 radius = 50.0
 
+[sub_resource type="Animation" id="Animation_sx08q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3g7de"]
+resource_name = "walkBack"
+length = 8.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(8, 1), Vector2i(1, 1), Vector2i(9, 1), Vector2i(2, 1), Vector2i(10, 1), Vector2i(3, 1), Vector2i(11, 1), Vector2i(4, 1), Vector2i(12, 1), Vector2i(5, 1), Vector2i(13, 1), Vector2i(6, 1), Vector2i(14, 1), Vector2i(7, 1), Vector2i(15, 1), Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ujsmy"]
+resource_name = "walkFront"
+length = 8.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(8, 0), Vector2i(1, 0), Vector2i(9, 0), Vector2i(2, 0), Vector2i(10, 0), Vector2i(3, 0), Vector2i(11, 0), Vector2i(4, 0), Vector2i(12, 0), Vector2i(5, 0), Vector2i(13, 0), Vector2i(6, 0), Vector2i(14, 0), Vector2i(7, 0), Vector2i(15, 0), Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p8fi8"]
+_data = {
+"RESET": SubResource("Animation_sx08q"),
+"walkBack": SubResource("Animation_ujsmy"),
+"walkFront": SubResource("Animation_3g7de")
+}
+
 [node name="jogador" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_sqf12")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(10, 0)
 scale = Vector2(4, 4)
-texture = ExtResource("2_kasje")
-region_enabled = true
-region_rect = Rect2(512, 0, 32, 31)
+texture = ExtResource("2_rebg4")
+hframes = 16
+vframes = 3
+region_rect = Rect2(512, 0, 32, 32)
+region_filter_clip_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.2, 0.2)
@@ -129,6 +186,7 @@ texture_progress = ExtResource("7_t25b2")
 [node name="HealthBarBoss" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 0
 offset_left = 220.0
 offset_top = 400.0
 offset_right = 252.0
@@ -234,6 +292,11 @@ offset_top = 40.0
 offset_right = 208.0
 offset_bottom = 56.0
 columns = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p8fi8")
+}
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/FireBallTimer" to="." method="_on_fire_ball_timer_timeout"]

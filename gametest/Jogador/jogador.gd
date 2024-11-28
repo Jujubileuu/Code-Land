@@ -9,6 +9,8 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 
+@onready var anim = $AnimationPlayer
+
 var fireBall = preload("res://Jogador/attacks/fireball.tscn")
 @onready var fireBallTimer = get_node("Attack/FireBallTimer")
 @onready var fireBallAttackTimer = get_node("Attack/FireBallTimer/FireBallAttackTimer")
@@ -67,8 +69,10 @@ func movement():
 		sprite.flip_h = true
 	if mov.y > 0:
 		sprite.region_rect = Rect2(512,0,32,31)
+		anim.play("walkFront")
 	elif mov.y < 0:
 		sprite.region_rect = Rect2(0,0,32,31)
+		anim.play("walkBack")
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
 
