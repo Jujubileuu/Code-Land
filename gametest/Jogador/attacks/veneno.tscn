@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cne5i5n3c6boo"]
+
+[ext_resource type="Texture2D" uid="uid://cfx6kgk65vych" path="res://Texturas/Items/Weapons/greenFireBall.png" id="1_r40l7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs8nw"]
+size = Vector2(80, 70)
+
+[node name="Veneno" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 30)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_r40l7")
+hframes = 7
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 35)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_bs8nw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
