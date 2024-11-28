@@ -4,12 +4,13 @@ extends Node2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
-var time = 120
+var time = 119
 
 signal changetime(time)
+signal boss_presence(boss_present: bool)  # New signal to notify boss presence
 
 func _ready():
-	connect("changetime",Callable(player,"change_time"))
+	connect("changetime", Callable(player, "change_time"))
 
 func _on_timer_timeout():
 	time += 1
@@ -24,18 +25,22 @@ func _on_timer_timeout():
 				var counter = 0
 				while counter < i.enemy_num:
 					var enemy_spawn = new_enemy.instantiate()
+					var is_boss = new_enemy == preload("res://inimigos/boss_css.tscn") or new_enemy == preload("res://inimigos/boss_javascript.tscn")
+					enemy_spawn.is_boss = is_boss
 					enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
+					if is_boss:
+						emit_signal("boss_presence", true)  # Emit signal when boss is spawned
 					counter += 1
-	emit_signal("changetime",time)
+	emit_signal("changetime", time)
 
 func get_random_position():
-	var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
-	var top_left = Vector2(player.global_position.x - vpr.x*2, player.global_position.y - vpr.y*2)
-	var top_right = Vector2(player.global_position.x + vpr.x*2, player.global_position.y - vpr.y*2)
-	var bottom_left = Vector2(player.global_position.x - vpr.x*2, player.global_position.y + vpr.y*2)
-	var bottom_right = Vector2(player.global_position.x + vpr.x*2, player.global_position.y + vpr.y*2)
-	var pos_side = ["up","down","right","left"].pick_random()
+	var vpr = get_viewport_rect().size * randf_range(1.1, 1.4)
+	var top_left = Vector2(player.global_position.x - vpr.x * 2, player.global_position.y - vpr.y * 2)
+	var top_right = Vector2(player.global_position.x + vpr.x * 2, player.global_position.y - vpr.y * 2)
+	var bottom_left = Vector2(player.global_position.x - vpr.x * 2, player.global_position.y + vpr.y * 2)
+	var bottom_right = Vector2(player.global_position.x + vpr.x * 2, player.global_position.y + vpr.y * 2)
+	var pos_side = ["up", "down", "right", "left"].pick_random()
 	var spawn_pos1 = Vector2.ZERO
 	var spawn_pos2 = Vector2.ZERO
 	
