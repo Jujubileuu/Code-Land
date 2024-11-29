@@ -8,7 +8,7 @@ const ICON_PATH = "res://Texturas/Items/Upgrades/"
 const WEAPON_PATH = "res://Texturas/Items/Weapons/"
 const UPGRADES = {
 	"fireball1": {
-		"icon": ICON_PATH + "powerUpCooldown.png",
+		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
 		"details": "A ball of fire is thrown at a random enemy",
 		"level": "Level: 1",
@@ -16,7 +16,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"fireball2": {
-		"icon": ICON_PATH + "powerUpCooldown.png",
+		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
 		"details": "A addition Fire Ball is thrown",
 		"level": "Level: 2",
@@ -24,7 +24,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"fireball3": {
-		"icon": ICON_PATH + "powerUpCooldown.png",
+		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
 		"details": "Fire Ball now pass through another enemy and do +3 damage",
 		"level": "Level: 3",
@@ -32,7 +32,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"fireball4": {
-		"icon": ICON_PATH + "powerUpCooldown.png",
+		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
 		"details": "An additional 2 Fire Ball are thrown",
 		"level": "Level: 4",

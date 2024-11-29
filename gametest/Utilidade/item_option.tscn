@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ogjo7je6sqni"]
 
 [ext_resource type="Script" path="res://Utilidade/item_option.gd" id="1_wepp7"]
-[ext_resource type="Texture2D" uid="uid://bbn1gp3qsfmd5" path="res://Texturas/Items/Upgrades/powerUpCritic.png" id="2_ahfqf"]
+[ext_resource type="Texture2D" uid="uid://db3q8fabhhygc" path="res://Texturas/Items/Upgrades/regenLife.png" id="2_4tx63"]
 
 [node name="ItemOption" type="ColorRect"]
 custom_minimum_size = Vector2(180, 60)
@@ -25,7 +25,7 @@ layout_mode = 0
 offset_right = 120.0
 offset_bottom = 120.0
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_ahfqf")
+texture = ExtResource("2_4tx63")
 
 [node name="lbl_name" type="Label" parent="."]
 layout_mode = 0
