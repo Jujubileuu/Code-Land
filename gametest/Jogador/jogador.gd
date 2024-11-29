@@ -1,5 +1,5 @@
 extends CharacterBody2D #12:30
-
+# Atributos do personagem:
 var movement_speed = 160.0
 var healph = 100
 var maxhealph = 100
@@ -8,11 +8,20 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 var last_movement = Vector2.UP
+var collected_upgrades = []
+var upgrade_options = []
+var armor = 0
+var speed = 0
+var spell_cooldown = 0
+var spell_size = 0
+var additional_attacks = 0
 
+# Inclusão dos ataques:
 var fireBall = preload("res://Jogador/attacks/fireball.tscn")
 var ice_spear = preload("res://Jogador/attacks/ice.tscn")
 var tornado = preload("res://Jogador/attacks/tornado.tscn")
-var thunder = preload("res://Jogador/attacks/thunder.gd")
+var thunder = preload("res://Jogador/attacks/thunder.tscn") 
+var veneno = preload("res://Jogador/attacks/veneno.tscn")
 
 @onready var fireBallTimer = get_node("%FireBallTimer")
 @onready var fireBallAttackTimer = get_node("%FireBallAttackTimer")
@@ -26,16 +35,11 @@ var thunder = preload("res://Jogador/attacks/thunder.gd")
 @onready var TornadoTimer = get_node("%TornadoTimer")
 @onready var TornadoAttackTimer = get_node("%TornadoAttackTimer")
 
-
-var collected_upgrades = []
-var upgrade_options = []
-var armor = 0
-var speed = 0
-var spell_cooldown = 0
-var spell_size = 0
-var additional_attacks = 0
+@onready var VenenoTimer = get_node("%VenenoTimer")
+@onready var VenenoAttackTimer = get_node("%VenenoAttackTimer")
 
 
+# Atributos dos ataques:
 var fireball_ammo = 1
 var fireball_baseammo = 1
 var fireball_attackspeed = 1.5
@@ -55,6 +59,11 @@ var tornado_ammo = 1
 var tornado_baseammo = 1
 var tornado_attackspeed = 3
 var tornado_level = 1
+
+var veneno_ammo = 1
+var veneno_baseammo = 1
+var veneno_attackspeed = 1.5
+var veneno_level = 1
 
 var enemy_close = []
 
@@ -78,15 +87,22 @@ var enemy_close = []
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
 
+# Função que da o upgrade inicial pro personagem:
 func _ready():
 	upgrade_character("fireball1")
 	attack()
+	set_bar(experience, calculate_experiencecap())
+	_on_hurt_box_hurt(0,0,0)
+func _ready1():
+	upgrade_character("thunder1")
+	attack1()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
 
 func _physics_process(delta):
 	movement()
 
+# Função de movimento do personagem:
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -104,7 +120,7 @@ func movement():
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
 	
-
+# Função que ativa os ataques: (em teoria né)
 func attack():
 	if fireball_level > 0:
 		fireBallTimer.wait_time = fireball_attackspeed * (1-spell_cooldown)
@@ -115,16 +131,19 @@ func attack1():
 		TornadoTimer.wait_time = tornado_attackspeed * (1-spell_cooldown)
 		if TornadoTimer.is_stopped():
 			TornadoTimer.start()
-func attack2():
 	if thunder_level > 0:
 		ThunderTimer.wait_time = thunder_attackspeed * (1-spell_cooldown)
 		if ThunderTimer.is_stopped():
-			ThunderTimer.start()
-func attack3():			
-	if ice_level >= 0:
+			ThunderTimer.start()			
+	if ice_level > 0:
 		IceTimer.wait_time = ice_attackspeed * (1-spell_cooldown)
 		if IceTimer.is_stopped():
 			IceTimer.start()
+	#if veneno > 0:
+		#VenenoTimer.wait_time = veneno_attackspeed * (1-spell_cooldown)
+		#if VenenoTimer.is_stopped():
+			#VenenoTimer.start()
+	
 	
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
@@ -278,7 +297,7 @@ func upgrade_character(upgrade):
 				healph = 100
 			maxhealph = clamp(healph,0,maxhealph)
 	#adjust_gui_collection(upgrade)
-	attack()
+	#attack()
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
@@ -353,3 +372,11 @@ func death():
 		lblResult.text = "QUE BAGULHO EM..."
 		sndLose.play()
 	
+
+
+func _on_veneno_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_veneno_attack_timer_timeout() -> void:
+	pass # Replace with function body.

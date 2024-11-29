@@ -35,6 +35,14 @@ const UPGRADES = {
 		"prerequisite": ["fireball3"],
 		"type": "weapon"
 	},
+	"thunder1": {
+		"icon": ICON_PATH + "powerUpCooldown.png",
+		"display": "THUNDER",
+		"details": "A ball of fire is thrown at a random enemy",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+		},
 	"armor1": {
 		"icon": ICON_PATH + "powerUpShield.png",
 		"display": "Armor",

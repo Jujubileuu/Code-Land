@@ -85,6 +85,12 @@ unique_name_in_owner = true
 [node name="ThunderAttackTimer" type="Timer" parent="Attack/ThunderTimer"]
 unique_name_in_owner = true
 
+[node name="VenenoTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="VenenoAttackTimer" type="Timer" parent="Attack/VenenoTimer"]
+unique_name_in_owner = true
+
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 4
@@ -253,6 +259,8 @@ columns = 10
 [connection signal="timeout" from="Attack/FireBallTimer/FireBallAttackTimer" to="." method="_on_fire_ball_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
 [connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/VenenoTimer" to="." method="_on_veneno_timer_timeout"]
+[connection signal="timeout" from="Attack/VenenoTimer/VenenoAttackTimer" to="." method="_on_veneno_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
