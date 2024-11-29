@@ -10,6 +10,7 @@ var speed = -5
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
 @onready var sound = $snd_collected
+@onready var anim = $AnimationPlayer
 
 func _ready():
 	if experience < 5:
@@ -18,6 +19,7 @@ func _ready():
 		sprite.self_modulate = Color8(255,0,0,255)
 	else: 
 		sprite.self_modulate = Color8(0,0,0,255)
+	anim.play("stand")
 
 func _physics_process(delta):
 	if target != null:

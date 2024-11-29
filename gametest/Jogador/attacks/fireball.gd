@@ -10,6 +10,7 @@ var attack_size = 1.0
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
+@onready var anim = $AnimationPlayer
 @onready var player = get_tree().get_first_node_in_group("player")
 signal remove_from_array(object)
 
@@ -41,7 +42,7 @@ func _ready():
 			damage = 8
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
-	
+	anim.play("attackAnim")
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(2,2)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
