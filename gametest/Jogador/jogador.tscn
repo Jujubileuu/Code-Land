@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://Texturas/GUI/exp_progress - Copia.png" id="5_armqj"]
 [ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://Texturas/GUI/healthbar - Copia.png" id="6_x7xd8"]
 [ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://Texturas/GUI/health - Copia.png" id="7_t25b2"]
-[ext_resource type="PackedScene" uid="uid://ciaocokcky53" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
+[ext_resource type="PackedScene" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
 [ext_resource type="Texture2D" uid="uid://cv0o8a1evnf6c" path="res://Texturas/gameover.png" id="8_li8jj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_378vh"]
@@ -213,6 +213,16 @@ scale = Vector2(4, 2)
 value = 50.0
 texture_over = ExtResource("6_x7xd8")
 texture_progress = ExtResource("7_t25b2")
+
+[node name="lbl_Boss" type="Label" parent="GUILayer/GUI/HealthBarBoss"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1.0
+offset_right = 101.0
+offset_bottom = 27.0
+scale = Vector2(0.3, 0.3)
+text = "BOSS"
+vertical_alignment = 1
 
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true

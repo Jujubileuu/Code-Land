@@ -32,6 +32,8 @@ func _on_timer_timeout():
 					if is_boss:
 						emit_signal("boss_presence", true)  # Emit signal when boss is spawned
 						UpgradeDb.boss_presence = true
+						UpgradeDb.boss_health = enemy_spawn.healph
+						UpgradeDb.boss_maxhealth = enemy_spawn.healph
 					counter += 1
 	emit_signal("changetime", time)
 

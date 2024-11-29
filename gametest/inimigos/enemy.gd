@@ -18,6 +18,7 @@ var knockback = Vector2.ZERO
 
 var death_anim = preload("res://inimigos/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
+var regen_health = preload("res://Objects/life_soda.tscn")
 
 signal remove_from_array(object)
 
@@ -49,6 +50,11 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
+	var rand = RandomNumberGenerator.new().randi_range(1,50)
+	if rand == 1:
+		var new_regen = regen_health.instantiate()
+		new_regen.global_position = global_position
+		loot_base.call_deferred("add_child", new_regen)
 	queue_free()
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
@@ -60,3 +66,5 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	knockback = angle * knockback_amount
 	if healph <= 0:
 		death()
+	if is_boss == true:
+		UpgradeDb.boss_health = healph

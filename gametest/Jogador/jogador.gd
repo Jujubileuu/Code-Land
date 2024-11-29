@@ -41,6 +41,7 @@ var enemy_close = []
 @onready var sndLevelUp = get_node("%snd_levelup")
 @onready var healthBar = get_node("%HealthBar")
 @onready var healthBarBoss = get_node("%HealthBarBoss")
+@onready var lblBoss = get_node("%lbl_Boss")
 @onready var lblTimer = get_node("%lblTimer")
 @onready var collectedWeapons = get_node("%CollectedWeapons")
 @onready var collectedUpgrades = get_node("%CollectedUpgrades")
@@ -127,13 +128,19 @@ func _on_enemy_detection_area_body_exited(body):
 
 
 func _on_grab_area_area_entered(area):
-	if area.is_in_group("loot"):
+	if area.is_in_group("loot") or area.is_in_group("loot_health"):
 		area.target = self
 
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
 		var gem_exp = area.collect()
 		calculate_experience(gem_exp)
+	if area.is_in_group("loot_health"):
+		var regen_health = area.collect()
+		healph += 20
+		if healph > maxhealph:
+			healph = maxhealph
+		healthBar.value = healph
 
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
@@ -207,7 +214,8 @@ func upgrade_character(upgrade):
 		"food":
 			healph += 20
 			if healph > maxhealph:
-				healph = 100
+				healph = maxhealph
+			healthBar.value = healph
 			maxhealph = clamp(healph,0,maxhealph)
 	#adjust_gui_collection(upgrade)
 	attack()
@@ -292,9 +300,15 @@ func _on_btn_menu_pressed():
 
 func boss_health():
 	var tween = healthBarBoss.create_tween()
-	if UpgradeDb.boss_presence == true:
+	if UpgradeDb.boss_presence == true and UpgradeDb.boss_health > 0:
+		if UpgradeDb.boss_maxhealth == 150:
+			lblBoss.text = "CSS"
+		elif UpgradeDb.boss_maxhealth == 200:
+			lblBoss.text = "JavaScript"
 		tween.tween_property(healthBarBoss,"position",Vector2(256,300),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 		tween.play
+		healthBarBoss.max_value = UpgradeDb.boss_maxhealth
+		healthBarBoss.value = UpgradeDb.boss_health
 	else:
-		tween.tween_property(healthBarBoss,"position",Vector2(256,400),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+		tween.tween_property(healthBarBoss,"position",Vector2(256,400),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 		tween.play
