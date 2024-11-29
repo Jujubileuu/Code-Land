@@ -40,6 +40,7 @@ var enemy_close = []
 @onready var itemOptions = preload("res://Utilidade/item_option.tscn")
 @onready var sndLevelUp = get_node("%snd_levelup")
 @onready var healthBar = get_node("%HealthBar")
+@onready var healthBarBoss = get_node("%HealthBarBoss")
 @onready var lblTimer = get_node("%lblTimer")
 @onready var collectedWeapons = get_node("%CollectedWeapons")
 @onready var collectedUpgrades = get_node("%CollectedUpgrades")
@@ -246,6 +247,7 @@ func get_random_item():
 		return null
 
 func change_time(argtime = 0):
+	boss_health()
 	time = argtime
 	var get_m = int(time/60.0)
 	var get_s = time % 60
@@ -289,4 +291,10 @@ func _on_btn_menu_pressed():
 	var _level = get_tree().change_scene_to_file("res://MenuScreen/menu.tscn")
 
 func boss_health():
-	pass
+	var tween = healthBarBoss.create_tween()
+	if UpgradeDb.boss_presence == true:
+		tween.tween_property(healthBarBoss,"position",Vector2(256,300),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+		tween.play
+	else:
+		tween.tween_property(healthBarBoss,"position",Vector2(256,400),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+		tween.play

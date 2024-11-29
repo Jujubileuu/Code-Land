@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
-var time = 400
+var time = 119
 
 signal changetime(time)
 signal boss_presence(boss_present: bool)  # New signal to notify boss presence
@@ -31,6 +31,7 @@ func _on_timer_timeout():
 					add_child(enemy_spawn)
 					if is_boss:
 						emit_signal("boss_presence", true)  # Emit signal when boss is spawned
+						UpgradeDb.boss_presence = true
 					counter += 1
 	emit_signal("changetime", time)
 
