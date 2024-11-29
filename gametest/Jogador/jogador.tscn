@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=24 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
 [ext_resource type="Texture2D" uid="uid://46ohgi2wredc" path="res://Texturas/Player/playerSprite.png" id="2_rebg4"]
@@ -25,6 +25,14 @@ radius = 300.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xns4j"]
 radius = 50.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0j7do"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rrif1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1l3k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mrs2c"]
 
 [sub_resource type="Animation" id="Animation_sx08q"]
 length = 0.001
@@ -291,6 +299,11 @@ offset_left = 280.0
 offset_top = 180.0
 offset_right = 360.0
 offset_bottom = 211.0
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.607843)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0j7do")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_rrif1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_w1l3k")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mrs2c")
 text = "MENU"
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI"]
