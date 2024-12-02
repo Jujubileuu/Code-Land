@@ -43,20 +43,20 @@ var veneno = preload("res://Jogador/attacks/veneno.tscn")
 var fireball_ammo = 1
 var fireball_baseammo = 1
 var fireball_attackspeed = 1.5
-var fireball_level = 1
+var fireball_level = 0
 
 var ice_ammo = 1
 var ice_baseammo = 1
 var ice_attackspeed = 1.5
-var ice_level = 1
+var ice_level = 0
 
 var thunder_ammo = 1
-var thunder_level = 1
+var thunder_level = 0
 
 var tornado_ammo = 1
 var tornado_baseammo = 1
 var tornado_attackspeed = 3
-var tornado_level = 1
+var tornado_level = 0
 
 var veneno_ammo = 1
 var veneno_baseammo = 1
@@ -87,7 +87,7 @@ var enemy_close = []
 
 # Função que da o upgrade inicial pro personagem:
 func _ready():
-	upgrade_character("fireball1")
+	upgrade_character("veneno")
 	attack()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)

@@ -2,9 +2,8 @@ extends Area2D
 
 var level = 1
 var healph = 9999
-var maxhealph = 9999
 var speed = 200
-var damage = 5
+var damage = 1
 var knockback_amount = 150
 var attack_size = 1.0
 
@@ -15,51 +14,61 @@ var angle = Vector2.ZERO
 signal remove_from_array(object)
 
 func _ready():
+	connect("body_entered", Callable(self, "_on_Attack_body_entered"))
 	angle = global_position.direction_to(target)
-	rotation = angle.angle() #+ deg_to_rad(135)
+	rotation = angle.angle()
+	
 	match level:
 		1:
-			healph = 9999 #2 atravessa 1 inimigo e some no próximo
+			healph = 9999
 			speed = 200
-			damage = 5
+			damage = 1
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
-			healph = 9999 #2 atravessa 1 inimigo e some no próximo
+			healph = 9999
 			speed = 200
-			damage = 5
+			damage = 1
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 		3:
-			healph = 9999 #2 atravessa 1 inimigo e some no próximo
+			healph = 9999
 			speed = 200
-			damage = 8
+			damage = 1
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 		4:
-			healph = 9999 #2 atravessa 1 inimigo e some no próximo
+			healph = 9999
 			speed = 200
-			damage = 8
+			damage = 1
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
-	
+
 	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(2,2)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", Vector2(2, 2) * attack_size, 1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
-	
-	#connect("body_entered",self,_on_area_entered())
 
 func _physics_process(delta):
-	position += angle*speed*delta
+	if speed > 0:
+		position += angle * speed * delta
+
+func _on_Attack_body_entered(body):
+	if body.is_in_group("enemy"):
+		speed = 0  # Stop the attack movement
+		enemy_hit()
+		emit_signal("remove_from_array", self)
+		queue_free()
+
+func enemy_hit(charge = 1):
+	healph -= charge
+	speed = 0
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(2.5, 2.5) * attack_size, 1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.play()
+	if healph <= 0:
+		emit_signal("remove_from_array", self)
+		queue_free()
 
 func _on_timer_timeout():
 	emit_signal("remove_from_array", self)
 	queue_free()
-
-
-func _on_area_entered(body):
-	if body.is_in_group("player") != true:
-		speed = 0
-		var tween = create_tween()
-		tween.tween_property(self, "scale", Vector2(2.5,2.5)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-		tween.play()
