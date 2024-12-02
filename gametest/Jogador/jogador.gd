@@ -51,8 +51,6 @@ var ice_attackspeed = 1.5
 var ice_level = 1
 
 var thunder_ammo = 1
-var thunder_baseammo = 1
-var thunder_attackspeed = 1.5
 var thunder_level = 1
 
 var tornado_ammo = 1
@@ -93,11 +91,6 @@ func _ready():
 	attack()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
-func _ready1():
-	upgrade_character("thunder1")
-	attack1()
-	set_bar(experience, calculate_experiencecap())
-	_on_hurt_box_hurt(0,0,0)
 
 func _physics_process(delta):
 	movement()
@@ -126,23 +119,21 @@ func attack():
 		fireBallTimer.wait_time = fireball_attackspeed * (1-spell_cooldown)
 		if fireBallTimer.is_stopped():
 			fireBallTimer.start()
-func attack1():
 	if tornado_level > 0:
 		TornadoTimer.wait_time = tornado_attackspeed * (1-spell_cooldown)
 		if TornadoTimer.is_stopped():
 			TornadoTimer.start()
 	if thunder_level > 0:
-		ThunderTimer.wait_time = thunder_attackspeed * (1-spell_cooldown)
-		if ThunderTimer.is_stopped():
-			ThunderTimer.start()			
+		pass
+		#spawn_javelin()
 	if ice_level > 0:
 		IceTimer.wait_time = ice_attackspeed * (1-spell_cooldown)
 		if IceTimer.is_stopped():
 			IceTimer.start()
-	#if veneno > 0:
-		#VenenoTimer.wait_time = veneno_attackspeed * (1-spell_cooldown)
-		#if VenenoTimer.is_stopped():
-			#VenenoTimer.start()
+	if veneno_level > 0:
+		VenenoTimer.wait_time = veneno_attackspeed * (1-spell_cooldown)
+		if VenenoTimer.is_stopped():
+			VenenoTimer.start()
 	
 	
 
@@ -171,9 +162,14 @@ func _on_fire_ball_attack_timer_timeout():
 			fireBallAttackTimer.start()
 		else:
 			fireBallAttackTimer.stop()
+
+func _on_ice_timer_timeout():
+	ice_ammo += ice_baseammo + additional_attacks
+	IceAttackTimer.start()
+
 func _on_ice_attack_timer_timeout():
 	if ice_ammo > 0:
-		var ice_attack = IceTimer.instantiate()
+		var ice_attack = ice_spear.instantiate()
 		ice_attack.position = position
 		ice_attack.target = get_random_target()
 		ice_attack.level = ice_level
@@ -182,8 +178,25 @@ func _on_ice_attack_timer_timeout():
 		if ice_ammo > 0:
 			IceAttackTimer.start()
 		else:
-			IceAttackTimer.stop()	
+			IceAttackTimer.stop()
 	
+func _on_veneno_timer_timeout() -> void:
+	veneno_ammo += veneno_baseammo + additional_attacks
+	VenenoAttackTimer.start()
+
+
+func _on_veneno_attack_timer_timeout():
+	if veneno_ammo > 0:
+		var veneno_attack = veneno.instantiate()
+		veneno_attack.position = position
+		veneno_attack.target = get_random_target()
+		veneno_attack.level = veneno_level
+		add_child(veneno_attack)
+		veneno_ammo -= 1
+		if veneno_ammo > 0:
+			VenenoAttackTimer.start()
+		else:
+			VenenoAttackTimer.stop()
 
 func _on_tornado_timer_timeout():
 	tornado_ammo += tornado_baseammo + additional_attacks
@@ -297,7 +310,7 @@ func upgrade_character(upgrade):
 				healph = 100
 			maxhealph = clamp(healph,0,maxhealph)
 	#adjust_gui_collection(upgrade)
-	#attack()
+	attack()
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
@@ -371,12 +384,3 @@ func death():
 	else:
 		lblResult.text = "QUE BAGULHO EM..."
 		sndLose.play()
-	
-
-
-func _on_veneno_timer_timeout() -> void:
-	pass # Replace with function body.
-
-
-func _on_veneno_attack_timer_timeout() -> void:
-	pass # Replace with function body.

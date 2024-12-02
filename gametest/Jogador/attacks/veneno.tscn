@@ -1,25 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dal871dbhese1"]
+[gd_scene load_steps=4 format=3 uid="uid://bh23fu67mx2yr"]
 
+[ext_resource type="Script" path="res://Jogador/attacks/veneno.gd" id="1_3rdeb"]
 [ext_resource type="Texture2D" uid="uid://cfx6kgk65vych" path="res://Texturas/Items/Weapons/greenFireBall.png" id="1_r40l7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs8nw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbqaa"]
 size = Vector2(67, 70)
 
-[node name="Veneno" type="Node2D"]
+[node name="veneno" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_3rdeb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(5, 30)
 scale = Vector2(2.92308, 2.5)
 texture = ExtResource("1_r40l7")
 hframes = 9
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7.62939e-06, 28)
+position = Vector2(-4, 0)
 scale = Vector2(0.999999, 0.999999)
-shape = SubResource("RectangleShape2D_bs8nw")
+shape = SubResource("RectangleShape2D_fbqaa")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
