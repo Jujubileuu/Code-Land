@@ -38,6 +38,7 @@ var veneno = preload("res://Jogador/attacks/veneno.tscn")
 @onready var VenenoTimer = get_node("%VenenoTimer")
 @onready var VenenoAttackTimer = get_node("%VenenoAttackTimer")
 
+@onready var javelinBase = get_node("%JavelinBase")
 
 # Atributos dos ataques:
 var fireball_ammo = 1
@@ -51,7 +52,7 @@ var ice_attackspeed = 1.5
 var ice_level = 0
 
 var thunder_ammo = 1
-var thunder_level = 0
+var thunder_level = 1
 
 var tornado_ammo = 1
 var tornado_baseammo = 1
@@ -61,7 +62,7 @@ var tornado_level = 0
 var veneno_ammo = 1
 var veneno_baseammo = 1
 var veneno_attackspeed = 1.5
-var veneno_level = 1
+var veneno_level = 0
 
 var enemy_close = []
 
@@ -124,8 +125,7 @@ func attack():
 		if TornadoTimer.is_stopped():
 			TornadoTimer.start()
 	if thunder_level > 0:
-		pass
-		#spawn_javelin()
+		spawn_javelin()
 	if ice_level > 0:
 		IceTimer.wait_time = ice_attackspeed * (1-spell_cooldown)
 		if IceTimer.is_stopped():
@@ -136,6 +136,19 @@ func attack():
 			VenenoTimer.start()
 	
 	
+func spawn_javelin():
+	var get_thunder_total = thunderBase.get_child_count()
+	var calc_spawns = (thunder_ammo + additional_attacks) - get_thunder_total
+	while calc_spawns > 0:
+		var thunder_spawn = thunder.instantiate()
+		thunder_spawn.global_position = global_position
+		thunderBase.add_child(thunder_spawn)
+		calc_spawns -= 1
+	#Upgrade Javelin
+	var get_thunder = thunderBase.get_children()
+	for i in get_thunder:
+		if i.has_method("update_thunder"):
+			i.update_javelin()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	healph -= clamp(damage-armor, 1.0, 999.00)

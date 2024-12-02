@@ -12,6 +12,7 @@ var knockback = Vector2.ZERO
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var hitBox = $HitBox
 
+var attack = preload("res://Jogador/attacks/ice.tscn")
 var death_anim = preload("res://inimigos/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
 
@@ -19,6 +20,7 @@ signal remove_from_array(object)
 
 func _ready():
 	hitBox.damage = enemy_damage
+	attack.connect("enemy_hit_signal", Callable(self, "_on_enemy_hit"))
 
 func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
@@ -49,3 +51,10 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	knockback = angle * knockback_amount
 	if healph <= 0:
 		death()
+	else:
+		set_speed(0.0)
+		await get_tree().create_timer(UpgradeDb.stunIce).timeout
+		set_speed(60.0)
+
+func set_speed(value: float): 
+	movement_speed = value

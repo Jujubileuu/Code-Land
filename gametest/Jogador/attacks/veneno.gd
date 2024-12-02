@@ -14,7 +14,6 @@ var angle = Vector2.ZERO
 signal remove_from_array(object)
 
 func _ready():
-	connect("body_entered", Callable(self, "_on_Attack_body_entered"))
 	angle = global_position.direction_to(target)
 	rotation = angle.angle()
 	
@@ -51,13 +50,6 @@ func _ready():
 func _physics_process(delta):
 	if speed > 0:
 		position += angle * speed * delta
-
-func _on_Attack_body_entered(body):
-	if body.is_in_group("enemy"):
-		speed = 0  # Stop the attack movement
-		enemy_hit()
-		emit_signal("remove_from_array", self)
-		queue_free()
 
 func enemy_hit(charge = 1):
 	healph -= charge

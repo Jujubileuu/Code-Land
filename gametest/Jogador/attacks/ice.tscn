@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dki5fnirscl8k"]
 
-[ext_resource type="Script" path="res://Jogador/attacks/fireball.gd" id="1_a1c21"]
+[ext_resource type="Script" path="res://Jogador/attacks/ice_spear.gd" id="1_ijkwb"]
 [ext_resource type="Texture2D" uid="uid://cgf2q3y4vyufq" path="res://Texturas/Items/ataqueneve.png" id="2_kkmco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfxbc"]
@@ -11,7 +11,7 @@ top_level = true
 scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_a1c21")
+script = ExtResource("1_ijkwb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(13.125, 30)
@@ -30,4 +30,5 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
