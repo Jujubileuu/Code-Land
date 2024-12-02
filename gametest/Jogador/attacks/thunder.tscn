@@ -1,33 +1,42 @@
 [gd_scene load_steps=4 format=3 uid="uid://hlxhachvanty"]
 
-[ext_resource type="Script" path="res://Jogador/attacks/fireball.gd" id="1_0e70q"]
+[ext_resource type="Script" path="res://Jogador/attacks/thunder.gd" id="1_rg336"]
 [ext_resource type="Texture2D" uid="uid://dqojeeohhvgjm" path="res://Texturas/Items/Weapons/lightningAttack.png" id="2_pf06u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfxbc"]
 size = Vector2(50, 60.0001)
 
-[node name="Ice" type="Area2D" groups=["attack"]]
+[node name="thunder" type="Area2D" groups=["attack"]]
 top_level = true
-scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_0e70q")
+script = ExtResource("1_rg336")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(13.125, 30)
-scale = Vector2(2.73148, 2.5)
+scale = Vector2(2, 2)
 texture = ExtResource("2_pf06u")
-hframes = 5
-frame = 2
+hframes = 7
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(25, 30)
+position = Vector2(4, -2)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_vfxbc")
+disabled = true
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="ChangeDirection" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="ResetPosTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ChangeDirection" to="." method="_on_change_direction_timeout"]
+[connection signal="timeout" from="ResetPosTimer" to="." method="_on_reset_pos_timer_timeout"]

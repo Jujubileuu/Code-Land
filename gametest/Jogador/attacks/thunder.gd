@@ -29,11 +29,12 @@ var spr_jav_atk = preload("res://Texturas/Items/Weapons/lightningAttack.png")
 signal remove_from_array(object)
 
 func _ready():
-	update_javelin()
+	sprite.visible = true
+	update_thunder()
 	_on_reset_pos_timer_timeout()
 
-func update_javelin():
-	level = player.javelin_level
+func update_thunder():
+	level = player.thunder_level
 	match level:
 		1:
 			hp = 9999
@@ -69,7 +70,7 @@ func update_javelin():
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 			
 	
-	scale = Vector2(1.0,1.0) * attack_size
+	scale = Vector2(2.0,2.0) * attack_size
 	attackTimer.wait_time = attack_speed
 
 func _physics_process(delta):
@@ -85,7 +86,7 @@ func _physics_process(delta):
 		rotation = global_position.direction_to(player.global_position).angle() + deg_to_rad(135)
 
 func add_paths():
-	snd_attack.play()
+	#snd_attack.play()
 	emit_signal("remove_from_array",self)
 	target_array.clear()
 	var counter = 0
@@ -122,7 +123,7 @@ func _on_change_direction_timeout():
 		if target_array.size() > 0:
 			target = target_array[0]
 			process_path()
-			snd_attack.play()
+			#snd_attack.play()
 			emit_signal("remove_from_array",self)
 		else:
 			changeDirectionTimer.stop()

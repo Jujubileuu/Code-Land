@@ -79,16 +79,13 @@ wait_time = 2.0
 unique_name_in_owner = true
 wait_time = 0.1
 
-[node name="ThunderTimer" type="Timer" parent="Attack"]
-unique_name_in_owner = true
-
-[node name="ThunderAttackTimer" type="Timer" parent="Attack/ThunderTimer"]
-unique_name_in_owner = true
-
 [node name="VenenoTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
 
 [node name="VenenoAttackTimer" type="Timer" parent="Attack/VenenoTimer"]
+unique_name_in_owner = true
+
+[node name="thunderBase" type="Node2D" parent="Attack"]
 unique_name_in_owner = true
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
