@@ -36,28 +36,32 @@ var veneno = preload("res://Jogador/attacks/veneno.tscn")
 @onready var VenenoAttackTimer = get_node("%VenenoAttackTimer")
 
 @onready var thunderBase = get_node("%thunderBase")
+@onready var thunderTimer = get_node("%ThunderTimer")
+@onready var thunderAttackTimer = get_node("%ThunderAttackTimer")
 
 # Atributos dos ataques:
 var fireball_ammo = 1
-var fireball_baseammo = 1
+var fireball_baseammo = 0
 var fireball_attackspeed = 1.5
 var fireball_level = 0
 
 var ice_ammo = 1
-var ice_baseammo = 1
+var ice_baseammo = 0
 var ice_attackspeed = 1.5
 var ice_level = 0
 
 var thunder_ammo = 1
+var thunder_baseammo = 0
+var thunder_attackspeed = 10
 var thunder_level = 1
 
 var tornado_ammo = 1
-var tornado_baseammo = 1
+var tornado_baseammo = 0
 var tornado_attackspeed = 3
 var tornado_level = 0
 
 var veneno_ammo = 1
-var veneno_baseammo = 1
+var veneno_baseammo = 0
 var veneno_attackspeed = 1.5
 var veneno_level = 0
 
@@ -122,7 +126,9 @@ func attack():
 		if TornadoTimer.is_stopped():
 			TornadoTimer.start()
 	if thunder_level > 0:
-		spawn_thunder()
+		thunderTimer.wait_time = thunder_attackspeed * (1-spell_cooldown)
+		if thunderTimer.is_stopped():
+			thunderTimer.start()
 	if ice_level > 0:
 		IceTimer.wait_time = ice_attackspeed * (1-spell_cooldown)
 		if IceTimer.is_stopped():
@@ -177,10 +183,9 @@ func _on_ice_attack_timer_timeout():
 		else:
 			IceAttackTimer.stop()
 	
-func _on_veneno_timer_timeout() -> void:
+func _on_veneno_timer_timeout():
 	veneno_ammo += veneno_baseammo + additional_attacks
 	VenenoAttackTimer.start()
-
 
 func _on_veneno_attack_timer_timeout():
 	if veneno_ammo > 0:
@@ -212,6 +217,13 @@ func _on_tornado_attack_timer_timeout():
 		else:
 			TornadoAttackTimer.stop()
 
+func _on_thunder_timer_timeout():
+	thunder_ammo += thunder_baseammo + additional_attacks
+	thunderAttackTimer.start()
+
+func _on_thunder_attack_timer_timeout():
+	spawn_thunder()
+
 func spawn_thunder():
 	var get_thunder_total = thunderBase.get_child_count()
 	var calc_spawns = (thunder_ammo + additional_attacks) - get_thunder_total
@@ -220,11 +232,6 @@ func spawn_thunder():
 		thunder_spawn.global_position = global_position
 		thunderBase.add_child(thunder_spawn)
 		calc_spawns -= 1
-	#Upgrade Javelin
-	var get_thunder = thunderBase.get_children()
-	for i in get_thunder:
-		if i.has_method("update_thunder"):
-			i.update_thunder()
 
 func get_random_target():
 	if enemy_close.size() > 0:

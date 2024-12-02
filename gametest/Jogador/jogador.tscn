@@ -53,7 +53,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_ewbeq")
 
 [node name="Attack" type="Node2D" parent="."]
-visible = false
 
 [node name="FireBallTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
@@ -83,6 +82,12 @@ wait_time = 0.1
 unique_name_in_owner = true
 
 [node name="VenenoAttackTimer" type="Timer" parent="Attack/VenenoTimer"]
+unique_name_in_owner = true
+
+[node name="ThunderTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="ThunderAttackTimer" type="Timer" parent="Attack/ThunderTimer"]
 unique_name_in_owner = true
 
 [node name="thunderBase" type="Node2D" parent="Attack"]
@@ -260,6 +265,8 @@ columns = 10
 [connection signal="timeout" from="Attack/IceTimer/IceAttackTimer" to="." method="_on_ice_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/VenenoTimer" to="." method="_on_veneno_timer_timeout"]
 [connection signal="timeout" from="Attack/VenenoTimer/VenenoAttackTimer" to="." method="_on_veneno_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/ThunderTimer" to="." method="_on_thunder_timer_timeout"]
+[connection signal="timeout" from="Attack/ThunderTimer/ThunderAttackTimer" to="." method="_on_thunder_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]

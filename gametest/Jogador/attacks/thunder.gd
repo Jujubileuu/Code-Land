@@ -1,11 +1,11 @@
 extends Area2D
 
 var level = 1
-var hp = 9999
+var hp = 3
 var speed = 200.0
 var damage = 10
 var knockback_amount = 100
-var paths = 1
+var paths = 10
 var attack_size = 1.0
 var attack_speed = 5.0
 
@@ -23,29 +23,28 @@ var spr_jav_atk = preload("res://Texturas/Items/Weapons/lightningAttack.png")
 @onready var collision = $CollisionShape2D
 @onready var attackTimer = get_node("%AttackTimer")
 @onready var changeDirectionTimer = get_node("%ChangeDirection")
-@onready var resetPosTimer = get_node ("%ResetPosTimer")
 @onready var snd_attack = $snd_attack
 
 signal remove_from_array(object)
 
 func _ready():
-	sprite.visible = true
 	update_thunder()
-	_on_reset_pos_timer_timeout()
+	global_position = player.global_position  # Inicia o ataque na posição do jogador
+	add_paths()
 
 func update_thunder():
 	level = player.thunder_level
 	match level:
 		1:
-			hp = 9999
+			hp = 3
 			speed = 200.0
 			damage = 10
 			knockback_amount = 100
-			paths = 1
+			paths = 10
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		2:
-			hp = 9999
+			hp = 2
 			speed = 200.0
 			damage = 10
 			knockback_amount = 100
@@ -53,7 +52,7 @@ func update_thunder():
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		3:
-			hp = 9999
+			hp = 2
 			speed = 200.0
 			damage = 10
 			knockback_amount = 100
@@ -61,21 +60,19 @@ func update_thunder():
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		4:
-			hp = 9999
+			hp = 2
 			speed = 200.0
 			damage = 15
 			knockback_amount = 120
 			paths = 3
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
-			
-	
 	scale = Vector2(2.0,2.0) * attack_size
-	attackTimer.wait_time = attack_speed
+	attackTimer.wait_time = 1
 
 func _physics_process(delta):
 	if target_array.size() > 0:
-		position += angle*speed*delta
+		position += angle * speed * delta
 	else:
 		var player_angle = global_position.direction_to(reset_pos)
 		var distance_dif = global_position - player.global_position
@@ -83,11 +80,16 @@ func _physics_process(delta):
 		if abs(distance_dif.x) > 500 or abs(distance_dif.y) > 500:
 			return_speed = 100
 		position += player_angle*return_speed*delta
-		rotation = global_position.direction_to(player.global_position).angle() + deg_to_rad(135)
+		rotation = global_position.direction_to(player.global_position).angle()
+
+func enemy_hit(charge = 1):
+	hp -= charge
+	if hp <= 0:
+		emit_signal("remove_from_array",self)
+		queue_free()
 
 func add_paths():
-	#snd_attack.play()
-	emit_signal("remove_from_array",self)
+	emit_signal("remove_from_array", self)
 	target_array.clear()
 	var counter = 0
 	while counter < paths:
@@ -102,7 +104,7 @@ func process_path():
 	angle = global_position.direction_to(target)
 	changeDirectionTimer.start()
 	var tween = create_tween()
-	var new_rotation_degrees = angle.angle() + deg_to_rad(135)
+	var new_rotation_degrees = angle.angle()
 	tween.tween_property(self,"rotation",new_rotation_degrees,0.25).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 
@@ -123,17 +125,13 @@ func _on_change_direction_timeout():
 		if target_array.size() > 0:
 			target = target_array[0]
 			process_path()
-			#snd_attack.play()
-			emit_signal("remove_from_array",self)
+			emit_signal("remove_from_array", self)
 		else:
-			changeDirectionTimer.stop()
 			attackTimer.start()
 			enable_attack(false)
 	else:
-		changeDirectionTimer.stop()
 		attackTimer.start()
 		enable_attack(false)
-
 
 func _on_reset_pos_timer_timeout():
 	var choose_direction = randi() % 4
