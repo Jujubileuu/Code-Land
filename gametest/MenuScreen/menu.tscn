@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dg0q5232s6edv"]
 
-[ext_resource type="PackedScene" path="res://Utilidade/basic_button.tscn" id="1_kgq80"]
+[ext_resource type="PackedScene" uid="uid://ciaocokcky53" path="res://Utilidade/basic_button.tscn" id="1_kgq80"]
 [ext_resource type="Script" path="res://MenuScreen/menu.gd" id="1_s3j26"]
 [ext_resource type="VideoStream" path="res://Texturas/menu.ogv" id="2_d5dep"]
 [ext_resource type="FontFile" uid="uid://dixtrjkh5vey" path="res://Texturas/Fonts/alagard.ttf" id="3_gfjot"]

@@ -85,8 +85,8 @@ const UPGRADES = {
 	"sand2": {
 		"icon": WEAPON_PATH + "sandIcon.png",
 		"display": "Sand Tornado",
-		"details": "Lorem Ipsum",
-		"level": "+1 tornado é lançado e aumenta knockback em 1/3",
+		"details": "+1 tornado é lançado e aumenta knockback em 1/3",
+		"level": "Level: 2",
 		"prerequisite": ["sand1"],
 		"type": "weapon"
 	},
@@ -108,7 +108,7 @@ const UPGRADES = {
 	},
 	"thunder1": {
 		"icon": WEAPON_PATH + "lightningAttackIcon.png",
-		"display": "Thunder Punch",
+		"display": "Thunder Line",
 		"details": "Lança um raio que persegue inimigos",
 		"level": "Level: 1",
 		"prerequisite": [],
@@ -116,7 +116,7 @@ const UPGRADES = {
 	},
 	"thunder2": {
 		"icon": WEAPON_PATH + "lightningAttackIcon.png",
-		"display": "Thunder Punch",
+		"display": "Thunder Line",
 		"details": "Atinje +3 inimigos",
 		"level": "Level: 2",
 		"prerequisite": ["thunder1"],
@@ -124,7 +124,7 @@ const UPGRADES = {
 	},
 	"thunder3": {
 		"icon": WEAPON_PATH + "lightningAttackIcon.png",
-		"display": "Thunder Punch",
+		"display": "Thunder Line",
 		"details": "+1 raio é lançado e +2 de dano",
 		"level": "Level: 3",
 		"prerequisite": ["thunder2"],
@@ -132,7 +132,7 @@ const UPGRADES = {
 	},
 	"thunder4": {
 		"icon": WEAPON_PATH + "lightningAttackIcon.png",
-		"display": "Thunder Punch",
+		"display": "Thunder Line",
 		"details": "+3 de dano e dobra o tamanho do ataque",
 		"level": "Level: 4",
 		"prerequisite": ["thunder3"],
