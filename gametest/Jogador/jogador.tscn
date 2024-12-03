@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=32 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
 [ext_resource type="Texture2D" uid="uid://46ohgi2wredc" path="res://Texturas/Player/playerSprite.png" id="2_rebg4"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
 [ext_resource type="Texture2D" uid="uid://cv0o8a1evnf6c" path="res://Texturas/gameover.png" id="8_li8jj"]
 [ext_resource type="FontFile" uid="uid://dixtrjkh5vey" path="res://Texturas/Fonts/alagard.ttf" id="8_qjd6n"]
+[ext_resource type="Texture2D" uid="uid://lx4dp6nuga33" path="res://Texturas/telaBook.png" id="12_nw31d"]
+[ext_resource type="Texture2D" uid="uid://brxkgp33d5smp" path="res://Texturas/whitePaper.png" id="13_8ocvo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_378vh"]
 radius = 45.0
@@ -37,6 +39,12 @@ radius = 50.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1l3k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mrs2c"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1ukwx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0benf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b6421"]
 
 [sub_resource type="Animation" id="Animation_sx08q"]
 length = 0.001
@@ -346,9 +354,6 @@ text = "RESULTADO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
-unique_name_in_owner = true
-
 [node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
 unique_name_in_owner = true
 
@@ -397,6 +402,76 @@ offset_right = 208.0
 offset_bottom = 56.0
 columns = 10
 
+[node name="VictoryPanel" type="Panel" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="background" type="TextureRect" parent="GUILayer/GUI/VictoryPanel"]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 0)
+offset_right = 640.0
+offset_bottom = 360.0
+texture = SubResource("CanvasTexture_1ukwx")
+
+[node name="bookTexture" type="TextureRect" parent="GUILayer/GUI/VictoryPanel/background"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("12_nw31d")
+expand_mode = 2
+
+[node name="paperTexture" type="TextureRect" parent="GUILayer/GUI/VictoryPanel/background"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 132.0
+offset_right = 492.0
+offset_bottom = 360.0
+texture = ExtResource("13_8ocvo")
+expand_mode = 3
+
+[node name="history" type="Label" parent="GUILayer/GUI/VictoryPanel/background/paperTexture"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 30.0
+offset_right = 310.0
+offset_bottom = 310.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_qjd6n")
+theme_override_font_sizes/font_size = 13
+text = "	CERTIFICADO
+
+Por ter enfrentado e superado os desafios das linguagens de programação, você agora é oficialmente reconhecido como um Mestre dos Códigos. Sua habilidade de navegar por sintaxes complexas, decifrar algoritmos e dominar o reino digital é um testemunho de sua perseverança e curiosidade.
+
+Parabéns você venceu."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="btn_menuVictory" parent="GUILayer/GUI/VictoryPanel/background/paperTexture" instance=ExtResource("8_ajqeu")]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 290.0
+offset_right = 241.0
+offset_bottom = 320.0
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_hover_color = Color(0, 0, 0, 0.392157)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_qjd6n")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0benf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b6421")
+text = "MENU"
+
+[node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/VictoryPanel"]
+unique_name_in_owner = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_p8fi8")
@@ -418,5 +493,7 @@ libraries = {
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="pressed" from="GUILayer/GUI/DeathPanel/btn_menu" to="." method="_on_btn_menu_pressed"]
+[connection signal="click_end" from="GUILayer/GUI/VictoryPanel/background/paperTexture/btn_menuVictory" to="GUILayer/GUI/VictoryPanel/background/paperTexture/btn_menuVictory" method="_on_click_end"]
+[connection signal="pressed" from="GUILayer/GUI/VictoryPanel/background/paperTexture/btn_menuVictory" to="." method="_on_btn_menu_victory_pressed"]
 
 [editable path="HurtBox"]

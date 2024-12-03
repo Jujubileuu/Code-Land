@@ -91,6 +91,10 @@ var enemy_close = []
 @onready var lblResult = get_node("%lbl_Result")
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
+@onready var victoryPanel = get_node("%VictoryPanel")
+@onready var paperVictory = get_node("%paperTexture")
+@onready var bookVictory = get_node("%bookTexture")
+@onready var backgroundVictory = get_node("%background")
 
 func _ready():
 	upgrade_character("fireball1")
@@ -473,13 +477,24 @@ func death():
 
 func victory():
 	if time > 600 and UpgradeDb.finalboss_presence == false:
-		deathPanel.visible = true
+		victoryPanel.visible = true
 		get_tree().paused = true
-		var tween = deathPanel.create_tween()
-		tween.tween_property(deathPanel,"modulate",Color8(255,255,255,255),5).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		var tween = backgroundVictory.create_tween()
+		tween.tween_property(backgroundVictory,"self_modulate",Color8(0,0,0,255),3).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 		tween.play()
-		lblResult.text = "SINTA-SE CODADO"
+		await get_tree().create_timer(1).timeout
+		var tween2 = bookVictory.create_tween()
+		tween2.tween_property(bookVictory,"self_modulate",Color8(255,255,255,255),2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		tween2.play()
+		await get_tree().create_timer(1).timeout
+		var tween3 = paperVictory.create_tween()
+		tween3.tween_property(paperVictory,"modulate",Color8(255,255,255,255),1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		tween3.play()
 		sndVictory.play()
+
+func _on_btn_menu_victory_pressed():
+	get_tree().paused = false
+	var _level = get_tree().change_scene_to_file("res://MenuScreen/menu.tscn")
 
 func _on_btn_menu_pressed():
 	get_tree().paused = false
