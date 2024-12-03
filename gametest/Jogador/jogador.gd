@@ -490,11 +490,11 @@ func _on_btn_menu_pressed():
 func boss_health():
 	var tween = healthBarBoss.create_tween()
 	if UpgradeDb.boss_presence == true and UpgradeDb.boss_health > 0:
-		if UpgradeDb.boss_maxhealth == 150:
+		if UpgradeDb.boss_maxhealth == 300:
 			lblBoss.text = "CSS"
-		elif UpgradeDb.boss_maxhealth == 200:
+		elif UpgradeDb.boss_maxhealth == 600:
 			lblBoss.text = "JavaScript"
-		elif UpgradeDb.boss_maxhealth == 500:
+		elif UpgradeDb.boss_maxhealth == 1000:
 			lblBoss.text = "PHP"
 		tween.tween_property(healthBarBoss,"position",Vector2(256,300),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 		tween.play
