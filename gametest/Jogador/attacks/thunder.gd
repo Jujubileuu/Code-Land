@@ -2,7 +2,7 @@ extends Area2D
 
 var level = 1
 var hp = 3
-var speed = 200.0
+var speed = 500.0
 var damage = 10
 var knockback_amount = 100
 var paths = 10
@@ -18,6 +18,7 @@ var reset_pos = Vector2.ZERO
 var spr_jav_reg = preload("res://Texturas/Items/Weapons/lightningAttack.png")
 var spr_jav_atk = preload("res://Texturas/Items/Weapons/lightningAttack.png")
 
+@onready var anim = $AnimationPlayer
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
@@ -37,7 +38,7 @@ func update_thunder():
 	match level:
 		1:
 			hp = 3
-			speed = 200.0
+			speed = 500.0
 			damage = 10
 			knockback_amount = 100
 			paths = 10
@@ -45,7 +46,7 @@ func update_thunder():
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		2:
 			hp = 2
-			speed = 200.0
+			speed = 500.0
 			damage = 10
 			knockback_amount = 100
 			paths = 2
@@ -53,7 +54,7 @@ func update_thunder():
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		3:
 			hp = 2
-			speed = 200.0
+			speed = 500.0
 			damage = 10
 			knockback_amount = 100
 			paths = 3
@@ -61,12 +62,13 @@ func update_thunder():
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		4:
 			hp = 2
-			speed = 200.0
+			speed = 500.0
 			damage = 15
 			knockback_amount = 120
 			paths = 3
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
+	anim.play("attackAnim")
 	scale = Vector2(2.0,2.0) * attack_size
 	attackTimer.wait_time = 1
 
@@ -111,10 +113,10 @@ func process_path():
 func enable_attack(atk = true):
 	if atk:
 		collision.call_deferred("set","disabled",false)
-		sprite.texture = spr_jav_atk
+		anim.play("standAnim")
 	else:
 		collision.call_deferred("set","disabled",true)
-		sprite.texture = spr_jav_reg
+		anim.play("RESET")
 
 func _on_attack_timer_timeout():
 	add_paths()

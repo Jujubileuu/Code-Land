@@ -52,12 +52,12 @@ var fireball_level = 0
 var ice_ammo = 0
 var ice_baseammo = 0
 var ice_attackspeed = 1.5
-var ice_level = 1
+var ice_level = 0
 
 var thunder_ammo = 0
-var thunder_baseammo = 0
+var thunder_baseammo = 1
 var thunder_attackspeed = 10
-var thunder_level = 0
+var thunder_level = 1
 
 var tornado_ammo = 0
 var tornado_baseammo = 0
@@ -65,9 +65,9 @@ var tornado_attackspeed = 3
 var tornado_level = 0
 
 var veneno_ammo = 0
-var veneno_baseammo = 1
+var veneno_baseammo = 0
 var veneno_attackspeed = 1.5
-var veneno_level = 1
+var veneno_level = 0
 
 var enemy_close = []
 

@@ -11,6 +11,7 @@ var stun = 2
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
+@onready var anim = $AnimationPlayer
 @onready var player = get_tree().get_first_node_in_group("player")
 signal remove_from_array(object)
 
@@ -50,8 +51,9 @@ func _ready():
 			attack_size = 1.0 * (1 + player.spell_size)
 			stun = 4
 			UpgradeDb.stunIce = stun
+	anim.play("attackAnim")
 	var tween = create_tween()
-	tween.tween_property(self,"scale",Vector2(1,1)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self,"scale",Vector2(1.5,1.5)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 
 func _physics_process(delta):

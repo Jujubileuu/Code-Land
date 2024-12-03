@@ -59,6 +59,7 @@ collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_w6q16")
 movement_speed = 100.0
+basemovement_speed = 100.0
 healph = 150
 knockback_recovery = 5.0
 enemy_damage = 7

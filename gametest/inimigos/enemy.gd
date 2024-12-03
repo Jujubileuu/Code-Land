@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var movement_speed = 60.0
+@export var basemovement_speed = 60.0
 @export var healph = 10
 @export var knockback_recovery = 3.5
 @export var enemy_damage = 1
@@ -66,5 +67,17 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	knockback = angle * knockback_amount
 	if healph <= 0:
 		death()
+	else: 
+		if is_boss != true and UpgradeDb.iceLevel < 4:
+			set_speed(0.0)
+			await get_tree().create_timer(UpgradeDb.stunIce).timeout
+			set_speed(basemovement_speed)
+		else:
+			set_speed(0.0)
+			await get_tree().create_timer(UpgradeDb.stunIce).timeout
+			set_speed(basemovement_speed)
 	if is_boss == true:
 		UpgradeDb.boss_health = healph
+
+func set_speed(value: float): 
+	movement_speed = value

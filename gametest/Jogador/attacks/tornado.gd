@@ -14,6 +14,7 @@ var angle_more = Vector2.ZERO
 
 signal remove_from_array(object)
 
+@onready var anim = $AnimationPlayer
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready():
@@ -42,8 +43,8 @@ func _ready():
 			damage = 40
 			knockback_amount = 250
 			attack_size = 4.0 * (1 + player.spell_size)
-
-			
+	anim.play("attackAnim")
+	
 	var move_to_less = Vector2.ZERO
 	var move_to_more = Vector2.ZERO
 	match last_movement:
@@ -86,6 +87,7 @@ func _ready():
 		tween.tween_property(self,"angle", angle_less,2)
 		tween.tween_property(self,"angle", angle_more,2)
 	tween.play()
+	anim.play("standAnim")
 
 func _physics_process(delta):
 	position += angle*speed*delta
