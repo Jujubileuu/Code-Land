@@ -87,7 +87,8 @@ var enemy_close = []
 @onready var collectedWeapons = get_node("%CollectedWeapons")
 @onready var collectedUpgrades = get_node("%CollectedUpgrades")
 @onready var itemContainer = preload("res://Jogador/GUI/item_container.tscn")
-
+@onready var bossScene = get_node("%BossScene")
+@onready var bossImg = get_node("%BossImg")
 @onready var deathPanel = get_node("%DeathPanel")
 @onready var lblResult = get_node("%lbl_Result")
 @onready var sndVictory = get_node("%snd_victory")
@@ -427,6 +428,7 @@ func get_random_item():
 		return null
 
 func change_time(argtime = 0):
+	victory()
 	boss_health()
 	time = argtime
 	var get_m = int(time/60.0)
@@ -436,6 +438,21 @@ func change_time(argtime = 0):
 	if get_s < 10:
 		get_s = str(0,get_s)
 	lblTimer.text = str(get_m,":",get_s)
+	if time == 599:
+		bossImg.visible = true
+		bossScene.visible = true
+		get_tree().paused = true
+		var tween2 = bossScene.create_tween()
+		tween2.tween_property(bossScene,"self_modulate",Color8(0,0,0,255),2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		tween2.play()
+		await get_tree().create_timer(2).timeout
+		var tween = bossImg.create_tween()
+		tween.tween_property(bossImg,"self_modulate",Color8(255,255,255,255),2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		tween.play()
+		await get_tree().create_timer(5).timeout
+		get_tree().paused = false
+		bossImg.visible = false
+		bossScene.visible = false
 
 #func adjust_gui_collection(upgrade):
 #	var get_upgraded_displayname = UpgradeDb.UPGRADES[upgrade]["display"]
@@ -459,12 +476,18 @@ func death():
 	var tween = deathPanel.create_tween()
 	tween.tween_property(deathPanel,"modulate",Color8(255,255,255,255),5).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
-	if time >= 600:
+	lblResult.text = "QUE BAGULHO EM..."
+	sndLose.play()
+
+func victory():
+	if time > 600 and UpgradeDb.finalboss_presence == false:
+		deathPanel.visible = true
+		get_tree().paused = true
+		var tween = deathPanel.create_tween()
+		tween.tween_property(deathPanel,"modulate",Color8(255,255,255,255),5).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		tween.play()
 		lblResult.text = "SINTA-SE CODADO"
 		sndVictory.play()
-	else:
-		lblResult.text = "QUE BAGULHO EM..."
-		sndLose.play()
 
 func _on_btn_menu_pressed():
 	get_tree().paused = false
@@ -477,6 +500,8 @@ func boss_health():
 			lblBoss.text = "CSS"
 		elif UpgradeDb.boss_maxhealth == 200:
 			lblBoss.text = "JavaScript"
+		elif UpgradeDb.boss_maxhealth == 500:
+			lblBoss.text = "PHP"
 		tween.tween_property(healthBarBoss,"position",Vector2(256,300),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 		tween.play
 		healthBarBoss.max_value = UpgradeDb.boss_maxhealth

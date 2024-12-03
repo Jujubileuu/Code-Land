@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=27 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
 [ext_resource type="Texture2D" uid="uid://46ohgi2wredc" path="res://Texturas/Player/playerSprite.png" id="2_rebg4"]
 [ext_resource type="PackedScene" uid="uid://y8stf5kqtp5c" path="res://Utilidade/hurt_box.tscn" id="3_30451"]
 [ext_resource type="Texture2D" uid="uid://cdvxc4eylrdd" path="res://Texturas/GUI/exp_background - Copia.png" id="4_kdlwp"]
+[ext_resource type="Texture2D" uid="uid://cbx7na4mlgbvv" path="res://Texturas/tela boss final.png" id="4_uuayr"]
 [ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://Texturas/GUI/exp_progress - Copia.png" id="5_armqj"]
 [ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://Texturas/GUI/healthbar - Copia.png" id="6_x7xd8"]
 [ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://Texturas/GUI/health - Copia.png" id="7_t25b2"]
@@ -26,6 +27,8 @@ radius = 300.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xns4j"]
 radius = 50.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7ljb6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0j7do"]
 
@@ -205,6 +208,29 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+
+[node name="BossScene" type="TextureRect" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+top_level = true
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = SubResource("CanvasTexture_7ljb6")
+
+[node name="BossImg" type="TextureRect" parent="GUILayer/GUI/BossScene"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = -3.0
+offset_right = 1032.0
+offset_bottom = 725.0
+scale = Vector2(0.62, 0.5)
+texture = ExtResource("4_uuayr")
 
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
