@@ -19,8 +19,6 @@ var veneno = preload("res://Jogador/attacks/poison.tscn")
 
 @onready var fireBallTimer = get_node("Attack/FireBallTimer")
 @onready var fireBallAttackTimer = get_node("Attack/FireBallTimer/FireBallAttackTimer")
-#@onready var fireBallTimer = get_node("%FireBallTimer")
-#@onready var fireBallAttackTimer = get_node("%FireBallAttackTimer")
 
 @onready var IceTimer = get_node("%IceTimer")
 @onready var IceAttackTimer = get_node("%IceAttackTimer")

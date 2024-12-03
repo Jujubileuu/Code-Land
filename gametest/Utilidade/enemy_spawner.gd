@@ -4,10 +4,10 @@ extends Node2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
-var time = 299
+var time = 0
 
 signal changetime(time)
-signal boss_presence(boss_present: bool)  # New signal to notify boss presence
+signal boss_presence(boss_present: bool)
 
 func _ready():
 	connect("changetime", Callable(player, "change_time"))
