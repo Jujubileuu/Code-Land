@@ -4,6 +4,7 @@ var boss_presence = false
 var boss_health = 0
 var boss_maxhealth = 0
 var critic_chance = 0
+var stunIce = 0
 const ICON_PATH = "res://Texturas/Items/Upgrades/"
 const WEAPON_PATH = "res://Texturas/Items/Weapons/"
 const UPGRADES = {

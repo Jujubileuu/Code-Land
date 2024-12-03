@@ -12,9 +12,30 @@ var collected_experience = 0
 @onready var anim = $AnimationPlayer
 
 var fireBall = preload("res://Jogador/attacks/fireball.tscn")
+var ice_spear = preload("res://Jogador/attacks/ice.tscn")
+var tornado = preload("res://Jogador/attacks/tornado.tscn")
+var thunder = preload("res://Jogador/attacks/thunder.tscn") 
+var veneno = preload("res://Jogador/attacks/poison.tscn")
+
 @onready var fireBallTimer = get_node("Attack/FireBallTimer")
 @onready var fireBallAttackTimer = get_node("Attack/FireBallTimer/FireBallAttackTimer")
+#@onready var fireBallTimer = get_node("%FireBallTimer")
+#@onready var fireBallAttackTimer = get_node("%FireBallAttackTimer")
 
+@onready var IceTimer = get_node("%IceTimer")
+@onready var IceAttackTimer = get_node("%IceAttackTimer")
+
+@onready var TornadoTimer = get_node("%TornadoTimer")
+@onready var TornadoAttackTimer = get_node("%TornadoAttackTimer")
+
+@onready var VenenoTimer = get_node("%VenenoTimer")
+@onready var VenenoAttackTimer = get_node("%VenenoAttackTimer")
+
+@onready var thunderBase = get_node("%thunderBase")
+@onready var thunderTimer = get_node("%ThunderTimer")
+@onready var thunderAttackTimer = get_node("%ThunderAttackTimer")
+
+var last_movement = Vector2.UP
 var collected_upgrades = []
 var upgrade_options = []
 var armor = 0
@@ -27,6 +48,26 @@ var fireball_ammo = 0
 var fireball_baseammo = 0
 var fireball_attackspeed = 1.5
 var fireball_level = 0
+
+var ice_ammo = 0
+var ice_baseammo = 0
+var ice_attackspeed = 1.5
+var ice_level = 1
+
+var thunder_ammo = 0
+var thunder_baseammo = 0
+var thunder_attackspeed = 10
+var thunder_level = 0
+
+var tornado_ammo = 0
+var tornado_baseammo = 0
+var tornado_attackspeed = 3
+var tornado_level = 0
+
+var veneno_ammo = 0
+var veneno_baseammo = 1
+var veneno_attackspeed = 1.5
+var veneno_level = 1
 
 var enemy_close = []
 
@@ -53,7 +94,7 @@ var enemy_close = []
 @onready var sndLose = get_node("%snd_lose")
 
 func _ready():
-	upgrade_character("fireball1")
+	upgrade_character("fireball")
 	attack()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
@@ -83,6 +124,22 @@ func attack():
 		fireBallTimer.wait_time = fireball_attackspeed * (1-spell_cooldown)
 		if fireBallTimer.is_stopped():
 			fireBallTimer.start()
+	if tornado_level > 0:
+		TornadoTimer.wait_time = tornado_attackspeed * (1-spell_cooldown)
+		if TornadoTimer.is_stopped():
+			TornadoTimer.start()
+	if thunder_level > 0:
+		thunderTimer.wait_time = thunder_attackspeed * (1-spell_cooldown)
+		if thunderTimer.is_stopped():
+			thunderTimer.start()
+	if ice_level > 0:
+		IceTimer.wait_time = ice_attackspeed * (1-spell_cooldown)
+		if IceTimer.is_stopped():
+			IceTimer.start()
+	if veneno_level > 0:
+		VenenoTimer.wait_time = veneno_attackspeed * (1-spell_cooldown)
+		if VenenoTimer.is_stopped():
+			VenenoTimer.start()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	healph -= clamp(damage-armor, 1.0, 999.00)
@@ -109,6 +166,73 @@ func _on_fire_ball_attack_timer_timeout():
 			fireBallAttackTimer.start()
 		else:
 			fireBallAttackTimer.stop()
+
+func _on_ice_timer_timeout():
+	ice_ammo += ice_baseammo + additional_attacks
+	IceAttackTimer.start()
+
+func _on_ice_attack_timer_timeout():
+	if ice_ammo > 0:
+		var ice_attack = ice_spear.instantiate()
+		ice_attack.position = position
+		ice_attack.target = get_random_target()
+		ice_attack.level = ice_level
+		add_child(ice_attack)
+		ice_ammo -= 1
+		if ice_ammo > 0:
+			IceAttackTimer.start()
+		else:
+			IceAttackTimer.stop()
+	
+func _on_veneno_timer_timeout():
+	veneno_ammo += veneno_baseammo + additional_attacks
+	VenenoAttackTimer.start()
+
+func _on_veneno_attack_timer_timeout():
+	if veneno_ammo > 0:
+		var veneno_attack = veneno.instantiate()
+		veneno_attack.position = position
+		veneno_attack.target = get_random_target()
+		veneno_attack.level = veneno_level
+		add_child(veneno_attack)
+		veneno_ammo -= 1
+		if veneno_ammo > 0:
+			VenenoAttackTimer.start()
+		else:
+			VenenoAttackTimer.stop()
+
+func _on_tornado_timer_timeout():
+	tornado_ammo += tornado_baseammo + additional_attacks
+	TornadoAttackTimer.start()
+
+func _on_tornado_attack_timer_timeout():
+	if tornado_ammo > 0:
+		var tornado_attack = tornado.instantiate()
+		tornado_attack.position = position
+		tornado_attack.last_movement = last_movement
+		tornado_attack.level = tornado_level
+		add_child(tornado_attack)
+		tornado_ammo -= 1
+		if tornado_ammo > 0:
+			TornadoAttackTimer.start()
+		else:
+			TornadoAttackTimer.stop()
+
+func _on_thunder_timer_timeout():
+	thunder_ammo += thunder_baseammo + additional_attacks
+	thunderAttackTimer.start()
+
+func _on_thunder_attack_timer_timeout():
+	spawn_thunder()
+
+func spawn_thunder():
+	var get_thunder_total = thunderBase.get_child_count()
+	var calc_spawns = (thunder_ammo + additional_attacks) - get_thunder_total
+	while calc_spawns > 0:
+		var thunder_spawn = thunder.instantiate()
+		thunder_spawn.global_position = global_position
+		thunderBase.add_child(thunder_spawn)
+		calc_spawns -= 1
 
 func get_random_target():
 	if enemy_close.size() > 0:

@@ -136,13 +136,39 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_ewbeq")
 
 [node name="Attack" type="Node2D" parent="."]
-visible = false
 
 [node name="FireBallTimer" type="Timer" parent="Attack"]
 wait_time = 1.5
 
 [node name="FireBallAttackTimer" type="Timer" parent="Attack/FireBallTimer"]
 wait_time = 0.075
+
+[node name="TornadoTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="TornadoAttackTimer" type="Timer" parent="Attack/TornadoTimer"]
+unique_name_in_owner = true
+
+[node name="IceTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="IceAttackTimer" type="Timer" parent="Attack/IceTimer"]
+unique_name_in_owner = true
+
+[node name="VenenoTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="VenenoAttackTimer" type="Timer" parent="Attack/VenenoTimer"]
+unique_name_in_owner = true
+
+[node name="ThunderTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="ThunderAttackTimer" type="Timer" parent="Attack/ThunderTimer"]
+unique_name_in_owner = true
+
+[node name="thunderBase" type="Node2D" parent="Attack"]
+unique_name_in_owner = true
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 visible = false
@@ -343,6 +369,14 @@ libraries = {
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/FireBallTimer" to="." method="_on_fire_ball_timer_timeout"]
 [connection signal="timeout" from="Attack/FireBallTimer/FireBallAttackTimer" to="." method="_on_fire_ball_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/IceTimer" to="." method="_on_ice_timer_timeout"]
+[connection signal="timeout" from="Attack/IceTimer/IceAttackTimer" to="." method="_on_ice_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/VenenoTimer" to="." method="_on_veneno_timer_timeout"]
+[connection signal="timeout" from="Attack/VenenoTimer/VenenoAttackTimer" to="." method="_on_veneno_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/ThunderTimer" to="." method="_on_thunder_timer_timeout"]
+[connection signal="timeout" from="Attack/ThunderTimer/ThunderAttackTimer" to="." method="_on_thunder_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
