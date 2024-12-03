@@ -334,7 +334,6 @@ func upgrade_character(upgrade):
 			ice_baseammo += 1
 		"ice4":
 			ice_level = 4
-			ice_baseammo += 1
 		"sand1":
 			tornado_level = 1
 			tornado_baseammo += 1
@@ -343,7 +342,6 @@ func upgrade_character(upgrade):
 			tornado_baseammo += 1
 		"sand3":
 			tornado_level = 3
-			tornado_baseammo += 1
 		"sand4":
 			tornado_level = 4
 			tornado_baseammo += 1
@@ -352,25 +350,21 @@ func upgrade_character(upgrade):
 			thunder_baseammo += 1
 		"thunder2":
 			thunder_level = 2
-			thunder_baseammo += 1
 		"thunder3":
 			thunder_level = 3
 			thunder_baseammo += 1
 		"thunder4":
 			thunder_level = 4
-			thunder_baseammo += 1
 		"poison1":
 			veneno_level = 1
 			veneno_baseammo += 1
 		"poison2":
 			veneno_level = 2
-			veneno_baseammo += 1
 		"poison3":
 			veneno_level = 3
-			veneno_baseammo += 1
+			veneno_baseammo += 2
 		"poison4":
 			veneno_level = 4
-			veneno_baseammo += 1
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":

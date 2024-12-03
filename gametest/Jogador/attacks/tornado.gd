@@ -2,10 +2,10 @@ extends Area2D
 
 var level = 1
 var hp = 9999
-var speed = 300.0
-var damage = 5
+var speed = 200.0
+var damage = 10
 var attack_size = 1.0
-var knockback_amount = 100
+var knockback_amount = 150
 
 var last_movement = Vector2.ZERO
 var angle = Vector2.ZERO
@@ -20,29 +20,29 @@ signal remove_from_array(object)
 func _ready():
 	match level:
 		1:
-			hp = 10
+			hp = 9999
 			speed = 200.0
 			damage = 10
-			knockback_amount = 100
+			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
-			hp = 20
-			speed = 300.0
-			damage = 20
-			knockback_amount = 150
-			attack_size = 2.0 * (1 + player.spell_size)
-		3:
-			hp = 30
-			speed = 350.0
-			damage = 30
+			hp = 9999
+			speed = 200.0
+			damage = 10
 			knockback_amount = 200
-			attack_size = 3.0 * (1 + player.spell_size)
-		4:
-			hp = 40
-			speed = 350.0
-			damage = 40
+			attack_size = 1.0 * (1 + player.spell_size)
+		3:
+			hp = 9999
+			speed = 200.0
+			damage = 10
 			knockback_amount = 250
-			attack_size = 4.0 * (1 + player.spell_size)
+			attack_size = 1.5 * (1 + player.spell_size)
+		4:
+			hp = 9999
+			speed = 200.0
+			damage = 10
+			knockback_amount = 250
+			attack_size = 2 * (1 + player.spell_size)
 	anim.play("attackAnim")
 	
 	var move_to_less = Vector2.ZERO

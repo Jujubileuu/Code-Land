@@ -169,7 +169,7 @@ spawns = Array[ExtResource("4_8gt27")]([SubResource("Resource_4d0jm"), SubResour
 
 [node name="ExperienceGem" parent="." instance=ExtResource("12_2hj0a")]
 position = Vector2(474, -304)
-experience = 50
+experience = 100
 
 [node name="Area2D" parent="." instance=ExtResource("13_pkwtq")]
 position = Vector2(-284, -308)

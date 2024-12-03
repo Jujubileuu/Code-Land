@@ -3,7 +3,7 @@ extends Area2D
 var level = 1
 var healph = 9999
 var speed = 200
-var damage = 5
+var damage = 1
 var knockback_amount = 150
 var attack_size = 1.0
 
@@ -21,27 +21,27 @@ func _ready():
 		1:
 			healph = 9999 #2 atravessa 1 inimigo e some no próximo
 			speed = 200
-			damage = 5
+			damage = 1
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
 			healph = 9999 #2 atravessa 1 inimigo e some no próximo
 			speed = 200
-			damage = 5
+			damage = 2
 			knockback_amount = 150
-			attack_size = 1.0 * (1 + player.spell_size)
+			attack_size = 2.0 * (1 + player.spell_size)
 		3:
 			healph = 9999 #2 atravessa 1 inimigo e some no próximo
 			speed = 200
-			damage = 8
+			damage = 2
 			knockback_amount = 150
-			attack_size = 1.0 * (1 + player.spell_size)
+			attack_size = 2.0 * (1 + player.spell_size)
 		4:
 			healph = 9999 #2 atravessa 1 inimigo e some no próximo
 			speed = 200
-			damage = 8
+			damage = 4
 			knockback_amount = 150
-			attack_size = 1.0 * (1 + player.spell_size)
+			attack_size = 2.0 * (1 + player.spell_size)
 	anim.play("attackAnim")
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(2,2)*attack_size,1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)

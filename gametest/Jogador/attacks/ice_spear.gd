@@ -22,7 +22,7 @@ func _ready():
 		1:
 			hp = 1
 			speed = 100
-			damage = 5
+			damage = 3
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 			stun = 2
@@ -30,15 +30,15 @@ func _ready():
 		2:
 			hp = 1
 			speed = 100
-			damage = 5
+			damage = 3
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 			stun = 3
 			UpgradeDb.stunIce = stun
 		3:
 			hp = 2
-			speed = 100
-			damage = 8
+			speed = 200
+			damage = 3
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 			stun = 3
@@ -46,7 +46,7 @@ func _ready():
 		4:
 			hp = 2
 			speed = 100
-			damage = 8
+			damage = 3
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 			stun = 4
