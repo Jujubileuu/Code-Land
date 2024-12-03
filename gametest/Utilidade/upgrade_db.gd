@@ -12,7 +12,7 @@ const UPGRADES = {
 	"fireball1": {
 		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
-		"details": "A ball of fire is thrown at a random enemy",
+		"details": "Uma bola de fogo é lançada em um alvo aleatório",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "weapon"
@@ -20,7 +20,7 @@ const UPGRADES = {
 	"fireball2": {
 		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
-		"details": "A addition Fire Ball is thrown",
+		"details": "Adicionalmente outra bola de fogo é lançada",
 		"level": "Level: 2",
 		"prerequisite": ["fireball1"],
 		"type": "weapon"
@@ -28,7 +28,7 @@ const UPGRADES = {
 	"fireball3": {
 		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
-		"details": "Fire Ball now pass through another enemy and do +3 damage",
+		"details": "Bola de fogo atravessa 1 inimigo e causa +3 de dano",
 		"level": "Level: 3",
 		"prerequisite": ["fireball2"],
 		"type": "weapon"
@@ -36,9 +36,137 @@ const UPGRADES = {
 	"fireball4": {
 		"icon": WEAPON_PATH + "fireBallIcon.png",
 		"display": "Fire Ball",
-		"details": "An additional 2 Fire Ball are thrown",
+		"details": "Adicionalmente 2 bolas de fogo são lançadas",
 		"level": "Level: 4",
 		"prerequisite": ["fireball3"],
+		"type": "weapon"
+	},
+	"ice1": {
+		"icon": WEAPON_PATH + "iceIcon.png",
+		"display": "Ice Storm",
+		"details": "Lorem Ipsum",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"ice2": {
+		"icon": WEAPON_PATH + "iceIcon.png",
+		"display": "Ice Storm",
+		"details": "Lorem Ipsum",
+		"level": "Level: 2",
+		"prerequisite": ["ice1"],
+		"type": "weapon"
+	},
+	"ice3": {
+		"icon": WEAPON_PATH + "iceIcon.png",
+		"display": "Ice Storm",
+		"details": "Lorem Ipsum",
+		"level": "Level: 3",
+		"prerequisite": ["ice2"],
+		"type": "weapon"
+	},
+	"ice4": {
+		"icon": WEAPON_PATH + "iceIcon.png",
+		"display": "Ice Storm",
+		"details": "Lorem Ipsum",
+		"level": "Level: 4",
+		"prerequisite": ["ice3"],
+		"type": "weapon"
+	},
+	"sand1": {
+		"icon": WEAPON_PATH + "sandIcon.png",
+		"display": "Sand Tornado",
+		"details": "Lorem Ipsum",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"sand2": {
+		"icon": WEAPON_PATH + "sandIcon.png",
+		"display": "Sand Tornado",
+		"details": "Lorem Ipsum",
+		"level": "Level: 2",
+		"prerequisite": ["sand1"],
+		"type": "weapon"
+	},
+	"sand3": {
+		"icon": WEAPON_PATH + "sandIcon.png",
+		"display": "Sand Tornado",
+		"details": "Lorem Ipsum",
+		"level": "Level: 3",
+		"prerequisite": ["sand2"],
+		"type": "weapon"
+	},
+	"sand4": {
+		"icon": WEAPON_PATH + "sandIcon.png",
+		"display": "Sand Tornado",
+		"details": "Lorem Ipsum",
+		"level": "Level: 4",
+		"prerequisite": ["sand3"],
+		"type": "weapon"
+	},
+	"thunder1": {
+		"icon": WEAPON_PATH + "lightningAttackIcon.png",
+		"display": "Thunder Strike",
+		"details": "Lorem Ipsum",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"thunder2": {
+		"icon": WEAPON_PATH + "lightningAttackIcon.png",
+		"display": "Thunder Strike",
+		"details": "Lorem Ipsum",
+		"level": "Level: 2",
+		"prerequisite": ["thunder1"],
+		"type": "weapon"
+	},
+	"thunder3": {
+		"icon": WEAPON_PATH + "lightningAttackIcon.png",
+		"display": "Thunder Strike",
+		"details": "Lorem Ipsum",
+		"level": "Level: 3",
+		"prerequisite": ["thunder2"],
+		"type": "weapon"
+	},
+	"thunder4": {
+		"icon": WEAPON_PATH + "lightningAttackIcon.png",
+		"display": "Thunder Strike",
+		"details": "Lorem Ipsum",
+		"level": "Level: 4",
+		"prerequisite": ["thunder3"],
+		"type": "weapon"
+	},
+	"poison1": {
+		"icon": WEAPON_PATH + "greenFireBallIcon.png",
+		"display": "Poison Cloud",
+		"details": "Lorem Ipsum",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"poison2": {
+		"icon": WEAPON_PATH + "greenFireBallIcon.png",
+		"display": "Poison Cloud",
+		"details": "Lorem Ipsum",
+		"level": "Level: 2",
+		"prerequisite": ["poison1"],
+		"type": "weapon"
+	},
+	"poison3": {
+		"icon": WEAPON_PATH + "greenFireBallIcon.png",
+		"display": "Poison Cloud",
+		"details": "Lorem Ipsum",
+		"level": "Level: 3",
+		"prerequisite": ["poison2"],
+		"type": "weapon"
+	},
+	"poison4": {
+		"icon": WEAPON_PATH + "greenFireBallIcon.png",
+		"display": "Poison Cloud",
+		"details": "Lorem Ipsum",
+		"level": "Level: 4",
+		"prerequisite": ["poison3"],
 		"type": "weapon"
 	},
 	"armor1": {

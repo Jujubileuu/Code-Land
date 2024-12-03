@@ -1,4 +1,4 @@
-extends CharacterBody2D #12:30
+extends CharacterBody2D
 
 var movement_speed = 160.0
 var healph = 100
@@ -55,9 +55,9 @@ var ice_attackspeed = 1.5
 var ice_level = 0
 
 var thunder_ammo = 0
-var thunder_baseammo = 1
+var thunder_baseammo = 0
 var thunder_attackspeed = 10
-var thunder_level = 1
+var thunder_level = 0
 
 var tornado_ammo = 0
 var tornado_baseammo = 0
@@ -94,7 +94,7 @@ var enemy_close = []
 @onready var sndLose = get_node("%snd_lose")
 
 func _ready():
-	upgrade_character("fireball")
+	upgrade_character("fireball1")
 	attack()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
@@ -322,6 +322,54 @@ func upgrade_character(upgrade):
 		"fireball4":
 			fireball_level = 4
 			fireball_baseammo += 2
+		"ice1":
+			ice_level = 1
+			ice_baseammo += 1
+		"ice2":
+			ice_level = 2
+			ice_baseammo += 1
+		"ice3":
+			ice_level = 3
+			ice_baseammo += 1
+		"ice4":
+			ice_level = 4
+			ice_baseammo += 1
+		"sand1":
+			tornado_level = 1
+			tornado_baseammo += 1
+		"sand2":
+			tornado_level = 2
+			tornado_baseammo += 1
+		"sand3":
+			tornado_level = 3
+			tornado_baseammo += 1
+		"sand4":
+			tornado_level = 4
+			tornado_baseammo += 1
+		"thunder1":
+			thunder_level = 1
+			thunder_baseammo += 1
+		"thunder2":
+			thunder_level = 2
+			thunder_baseammo += 1
+		"thunder3":
+			thunder_level = 3
+			thunder_baseammo += 1
+		"thunder4":
+			thunder_level = 4
+			thunder_baseammo += 1
+		"poison1":
+			veneno_level = 1
+			veneno_baseammo += 1
+		"poison2":
+			veneno_level = 2
+			veneno_baseammo += 1
+		"poison3":
+			veneno_level = 3
+			veneno_baseammo += 1
+		"poison4":
+			veneno_level = 4
+			veneno_baseammo += 1
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
