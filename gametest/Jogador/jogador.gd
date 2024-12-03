@@ -97,7 +97,7 @@ var enemy_close = []
 @onready var backgroundVictory = get_node("%background")
 
 func _ready():
-	upgrade_character("poison1")
+	upgrade_character("fireball1")
 	attack()
 	set_bar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)

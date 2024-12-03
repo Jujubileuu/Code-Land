@@ -406,12 +406,14 @@ columns = 10
 unique_name_in_owner = true
 process_mode = 2
 self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 
 [node name="background" type="TextureRect" parent="GUILayer/GUI/VictoryPanel"]
 unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 0)
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 texture = SubResource("CanvasTexture_1ukwx")
