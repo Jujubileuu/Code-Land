@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ctdv4apgops"]
+[gd_scene load_steps=25 format=3 uid="uid://ctdv4apgops"]
 
 [ext_resource type="Script" path="res://Jogador/jogador.gd" id="1_sqf12"]
 [ext_resource type="Texture2D" uid="uid://46ohgi2wredc" path="res://Texturas/Player/playerSprite.png" id="2_rebg4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://Texturas/GUI/health - Copia.png" id="7_t25b2"]
 [ext_resource type="PackedScene" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
 [ext_resource type="Texture2D" uid="uid://cv0o8a1evnf6c" path="res://Texturas/gameover.png" id="8_li8jj"]
+[ext_resource type="FontFile" uid="uid://dixtrjkh5vey" path="res://Texturas/Fonts/alagard.ttf" id="8_qjd6n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_378vh"]
 radius = 45.0
@@ -219,6 +220,7 @@ layout_mode = 0
 offset_left = 540.0
 offset_right = 640.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("8_qjd6n")
 text = "Level: 1"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -255,7 +257,9 @@ offset_left = 1.0
 offset_right = 101.0
 offset_bottom = 27.0
 scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_qjd6n")
 text = "BOSS"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
@@ -272,6 +276,8 @@ offset_bottom = 300.0
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("8_qjd6n")
+theme_override_font_sizes/font_size = 18
 text = "LEVEL UP!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -308,6 +314,7 @@ layout_mode = 0
 offset_top = 35.0
 offset_right = 640.0
 offset_bottom = 85.0
+theme_override_fonts/font = ExtResource("8_qjd6n")
 theme_override_font_sizes/font_size = 30
 text = "RESULTADO"
 horizontal_alignment = 1
@@ -326,6 +333,7 @@ offset_top = 180.0
 offset_right = 360.0
 offset_bottom = 211.0
 theme_override_colors/font_hover_color = Color(1, 1, 1, 0.607843)
+theme_override_fonts/font = ExtResource("8_qjd6n")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0j7do")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_rrif1")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_w1l3k")
@@ -339,6 +347,8 @@ offset_left = 280.0
 offset_top = 20.0
 offset_right = 360.0
 offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("8_qjd6n")
+theme_override_font_sizes/font_size = 20
 text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
