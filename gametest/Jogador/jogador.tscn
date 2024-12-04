@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b4ve6ephtpb7b" path="res://Texturas/GUI/exp_progress - Copia.png" id="5_armqj"]
 [ext_resource type="Texture2D" uid="uid://cwebj83ndibnb" path="res://Texturas/GUI/healthbar - Copia.png" id="6_x7xd8"]
 [ext_resource type="Texture2D" uid="uid://dx2vbyo26uyip" path="res://Texturas/GUI/health - Copia.png" id="7_t25b2"]
-[ext_resource type="PackedScene" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
+[ext_resource type="PackedScene" uid="uid://ciaocokcky53" path="res://Utilidade/basic_button.tscn" id="8_ajqeu"]
 [ext_resource type="Texture2D" uid="uid://cv0o8a1evnf6c" path="res://Texturas/gameover.png" id="8_li8jj"]
 [ext_resource type="FontFile" uid="uid://dixtrjkh5vey" path="res://Texturas/Fonts/alagard.ttf" id="8_qjd6n"]
 [ext_resource type="Texture2D" uid="uid://lx4dp6nuga33" path="res://Texturas/telaBook.png" id="12_nw31d"]
@@ -157,27 +157,35 @@ wait_time = 0.075
 
 [node name="TornadoTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
+wait_time = 3.0
 
 [node name="TornadoAttackTimer" type="Timer" parent="Attack/TornadoTimer"]
 unique_name_in_owner = true
+wait_time = 0.075
 
 [node name="IceTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
+wait_time = 5.0
 
 [node name="IceAttackTimer" type="Timer" parent="Attack/IceTimer"]
 unique_name_in_owner = true
+wait_time = 0.075
 
 [node name="VenenoTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
+wait_time = 1.5
 
 [node name="VenenoAttackTimer" type="Timer" parent="Attack/VenenoTimer"]
 unique_name_in_owner = true
+wait_time = 0.075
 
 [node name="ThunderTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
+wait_time = 10.0
 
 [node name="ThunderAttackTimer" type="Timer" parent="Attack/ThunderTimer"]
 unique_name_in_owner = true
+wait_time = 0.075
 
 [node name="thunderBase" type="Node2D" parent="Attack"]
 unique_name_in_owner = true
@@ -405,6 +413,7 @@ columns = 10
 [node name="VictoryPanel" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 640.0

@@ -30,32 +30,30 @@ func _ready():
 			speed = 200
 			damage = 2
 			knockback_amount = 150
-			attack_size = 2.0 * (1 + player.spell_size)
+			attack_size = 1.5 * (1 + player.spell_size)
 		3:
 			healph = 9999
 			speed = 200
 			damage = 2
 			knockback_amount = 150
-			attack_size = 2.0 * (1 + player.spell_size)
+			attack_size = 1.5 * (1 + player.spell_size)
 		4:
 			healph = 9999
 			speed = 200
 			damage = 4
 			knockback_amount = 150
-			attack_size = 2.0 * (1 + player.spell_size)
+			attack_size = 1.5 * (1 + player.spell_size)
 	anim.play("attackAnim")
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(2, 2) * attack_size, 1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 	damage_timer.start()
-	print("Damage Timer Started")
 
 func _physics_process(delta):
 	if speed > 0:
 		position += angle * speed * delta
 
 func _on_damage_timer_timeout():
-	print("Damage timer timed out")
 	apply_continuous_damage()
 
 func apply_continuous_damage():

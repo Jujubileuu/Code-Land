@@ -229,13 +229,15 @@ func _on_thunder_attack_timer_timeout():
 	spawn_thunder()
 
 func spawn_thunder():
-	var get_thunder_total = thunderBase.get_child_count()
-	var calc_spawns = (thunder_ammo + additional_attacks) - get_thunder_total
-	while calc_spawns > 0:
-		var thunder_spawn = thunder.instantiate()
-		thunder_spawn.global_position = global_position
-		thunderBase.add_child(thunder_spawn)
-		calc_spawns -= 1
+	var thunder_spawn = thunder.instantiate()
+	thunder_spawn.global_position = global_position
+	thunder_spawn.level = thunder_level
+	thunderBase.add_child(thunder_spawn)
+	thunder_ammo -= 1
+	if thunder_ammo > 0:
+		thunderAttackTimer.start()
+	else:
+		thunderAttackTimer.stop()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -372,9 +374,9 @@ func upgrade_character(upgrade):
 		"speed1","speed2","speed3","speed4":
 			movement_speed += 20.0
 		"Cooldown1","Cooldown2","Cooldown3","Cooldown4":
-			spell_cooldown += 0.1
+			spell_cooldown += 0.02
 		"AttackSize1","AttackSize2","AttackSize3","AttackSize4":
-			spell_size += 0.15
+			spell_size += 0.05
 		"MaxHealth1","MaxHealth2","MaxHealth3","MaxHealth4":
 			maxhealph += 15
 			healthBar.max_value = maxhealph
@@ -434,7 +436,7 @@ func change_time(argtime = 0):
 	if get_s < 10:
 		get_s = str(0,get_s)
 	lblTimer.text = str(get_m,":",get_s)
-	if time == 599:
+	if time == 359:
 		bossImg.visible = true
 		bossScene.visible = true
 		get_tree().paused = true
@@ -476,7 +478,7 @@ func death():
 	sndLose.play()
 
 func victory():
-	if time > 600 and UpgradeDb.finalboss_presence == false:
+	if time > 360 and UpgradeDb.finalboss_presence == false:
 		victoryPanel.visible = true
 		get_tree().paused = true
 		var tween = backgroundVictory.create_tween()

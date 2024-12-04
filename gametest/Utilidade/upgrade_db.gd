@@ -133,7 +133,7 @@ const UPGRADES = {
 	"thunder4": {
 		"icon": WEAPON_PATH + "lightningAttackIcon.png",
 		"display": "Thunder Line",
-		"details": "+3 de dano e dobra o tamanho do ataque",
+		"details": "+3 de dano e aumenta em 50% o tamanho do ataque",
 		"level": "Level: 4",
 		"prerequisite": ["thunder3"],
 		"type": "weapon"
@@ -149,7 +149,7 @@ const UPGRADES = {
 	"poison2": {
 		"icon": WEAPON_PATH + "greenFireBallIcon.png",
 		"display": "Poison Cloud",
-		"details": "+1 de dano contínuo e dobra o tamanho do ataque",
+		"details": "+1 de dano contínuo e aumenta em 50% o tamanho do ataque",
 		"level": "Level: 2",
 		"prerequisite": ["poison1"],
 		"type": "weapon"
@@ -237,7 +237,7 @@ const UPGRADES = {
 	"Cooldown1": {
 		"icon": ICON_PATH + "powerUpCooldown.png",
 		"display": "Exit Lag",
-		"details": "Diminui o cooldown para todos os ataques em 10%",
+		"details": "Diminui o cooldown para todos os ataques em 2%",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "upgrade"
@@ -245,7 +245,7 @@ const UPGRADES = {
 	"Cooldown2": {
 		"icon": ICON_PATH + "powerUpCooldown.png",
 		"display": "Exit Lag",
-		"details": "Diminui o cooldown para todos os ataques em mais 10%",
+		"details": "Diminui o cooldown para todos os ataques em mais 2%",
 		"level": "Level: 2",
 		"prerequisite": ["Cooldown1"],
 		"type": "upgrade"
@@ -253,7 +253,7 @@ const UPGRADES = {
 	"Cooldown3": {
 		"icon": ICON_PATH + "powerUpCooldown.png",
 		"display": "Exit Lag",
-		"details": "Diminui o cooldown para todos os ataques em mais 10%",
+		"details": "Diminui o cooldown para todos os ataques em mais 2%",
 		"level": "Level: 3",
 		"prerequisite": ["Cooldown2"],
 		"type": "upgrade"
@@ -261,7 +261,7 @@ const UPGRADES = {
 	"Cooldown4": {
 		"icon": ICON_PATH + "powerUpCooldown.png",
 		"display": "Exit Lag",
-		"details": "Diminui o cooldown para todos os ataques em mais 10%",
+		"details": "Diminui o cooldown para todos os ataques em mais 2%",
 		"level": "Level: 4",
 		"prerequisite": ["Cooldown3"],
 		"type": "upgrade"
@@ -269,7 +269,7 @@ const UPGRADES = {
 	"AttackSize1": {
 		"icon": ICON_PATH + "powerUpSize.png",
 		"display": "Scale-XY",
-		"details": "Aumenta em 15% o tamanho dos ataques",
+		"details": "Aumenta em 5% o tamanho dos ataques",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "upgrade"
@@ -277,7 +277,7 @@ const UPGRADES = {
 	"AttackSize2": {
 		"icon": ICON_PATH + "powerUpSize.png",
 		"display": "Scale-XY",
-		"details": "Aumenta em mais 15% o tamanho dos ataques",
+		"details": "Aumenta em mais 5% o tamanho dos ataques",
 		"level": "Level: 2",
 		"prerequisite": ["AttackSize1"],
 		"type": "upgrade"
@@ -285,7 +285,7 @@ const UPGRADES = {
 	"AttackSize3": {
 		"icon": ICON_PATH + "powerUpSize.png",
 		"display": "Scale-XY",
-		"details": "Aumenta em mais 15% o tamanho dos ataques",
+		"details": "Aumenta em mais 5% o tamanho dos ataques",
 		"level": "Level: 3",
 		"prerequisite": ["AttackSize2"],
 		"type": "upgrade"
@@ -293,7 +293,7 @@ const UPGRADES = {
 	"AttackSize4": {
 		"icon": ICON_PATH + "powerUpSize.png",
 		"display": "Scale-XY",
-		"details": "Aumenta em mais 15% o tamanho dos ataques",
+		"details": "Aumenta em mais 5% o tamanho dos ataques",
 		"level": "Level: 4",
 		"prerequisite": ["AttackSize3"],
 		"type": "upgrade"

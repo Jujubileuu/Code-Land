@@ -5,7 +5,7 @@ var hp = 3
 var speed = 500.0
 var damage = 10
 var knockback_amount = 100
-var paths = 10
+var paths = hp
 var attack_size = 1.0
 var attack_speed = 5.0
 
@@ -41,7 +41,7 @@ func update_thunder():
 			speed = 500.0
 			damage = 10
 			knockback_amount = 100
-			paths = 10
+			paths = hp
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		2:
@@ -49,7 +49,7 @@ func update_thunder():
 			speed = 500.0
 			damage = 10
 			knockback_amount = 100
-			paths = 10
+			paths = hp
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		3:
@@ -57,7 +57,7 @@ func update_thunder():
 			speed = 500.0
 			damage = 12
 			knockback_amount = 100
-			paths = 10
+			paths = hp
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 		4:
@@ -65,8 +65,8 @@ func update_thunder():
 			speed = 500.0
 			damage = 15
 			knockback_amount = 120
-			paths = 10
-			attack_size = 2.0 * (1 + player.spell_size)
+			paths = hp
+			attack_size = 1.5 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1-player.spell_cooldown)
 	anim.play("attackAnim")
 	scale = Vector2(2.0,2.0) * attack_size

@@ -3,7 +3,7 @@ extends Area2D
 var level = 1
 var hp = 9999
 var speed = 200.0
-var damage = 10
+var damage = 6
 var attack_size = 1.0
 var knockback_amount = 150
 
@@ -22,25 +22,25 @@ func _ready():
 		1:
 			hp = 9999
 			speed = 200.0
-			damage = 10
+			damage = 6
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
 			hp = 9999
 			speed = 200.0
-			damage = 10
+			damage = 6
 			knockback_amount = 200
 			attack_size = 1.0 * (1 + player.spell_size)
 		3:
 			hp = 9999
 			speed = 200.0
-			damage = 10
+			damage = 6
 			knockback_amount = 250
 			attack_size = 1.5 * (1 + player.spell_size)
 		4:
 			hp = 9999
 			speed = 200.0
-			damage = 10
+			damage = 6
 			knockback_amount = 250
 			attack_size = 2 * (1 + player.spell_size)
 	anim.play("attackAnim")
