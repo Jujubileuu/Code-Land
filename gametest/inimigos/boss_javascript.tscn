@@ -65,7 +65,7 @@ basemovement_speed = 120.0
 healph = 600
 knockback_recovery = 9999.0
 enemy_damage = 10
-experience = 50
+experience = 30
 is_boss = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

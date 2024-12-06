@@ -287,9 +287,9 @@ func calculate_experience(gem_exp):
 
 func calculate_experiencecap():
 	var exp_cap = experience_level
-	if experience_level < 20:
+	if experience_level < 6:
 		exp_cap = experience_level+5
-	elif experience_level < 40:
+	elif experience_level < 16:
 		exp_cap + 95 * (experience_level-19)*8
 	else:
 		exp_cap = 255 + (experience_level-39)*12
@@ -436,6 +436,9 @@ func change_time(argtime = 0):
 	if get_s < 10:
 		get_s = str(0,get_s)
 	lblTimer.text = str(get_m,":",get_s)
+	if time <= 1:
+		healthBarBoss.visible = false
+		UpgradeDb.boss_presence = false
 	if time == 359:
 		bossImg.visible = true
 		bossScene.visible = true
@@ -503,6 +506,7 @@ func _on_btn_menu_pressed():
 	var _level = get_tree().change_scene_to_file("res://MenuScreen/menu.tscn")
 
 func boss_health():
+	healthBarBoss.visible = true
 	var tween = healthBarBoss.create_tween()
 	if UpgradeDb.boss_presence == true and UpgradeDb.boss_health > 0:
 		if UpgradeDb.boss_maxhealth == 300:

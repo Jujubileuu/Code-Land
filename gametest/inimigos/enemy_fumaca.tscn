@@ -63,7 +63,7 @@ basemovement_speed = 70.0
 healph = 100
 knockback_recovery = 9999.0
 enemy_damage = 10
-experience = 25
+experience = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
