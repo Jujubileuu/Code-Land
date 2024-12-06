@@ -133,7 +133,7 @@ texture_repeat = 2
 scale = Vector2(10, 10)
 texture = ExtResource("1_d1hj3")
 region_enabled = true
-region_rect = Rect2(0, 0, 4000, 4000)
+region_rect = Rect2(0, -5056, 10000, 10000)
 
 [node name="jogador" parent="." instance=ExtResource("2_qaeij")]
 
