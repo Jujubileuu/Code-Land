@@ -141,7 +141,7 @@ const UPGRADES = {
 	"poison1": {
 		"icon": WEAPON_PATH + "greenFireBallIcon.png",
 		"display": "Poison Cloud",
-		"details": "Lança um ataque de veneno que causa dano em área",
+		"details": "Lança um ataque de veneno que causa dano contínuo em área",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "weapon"

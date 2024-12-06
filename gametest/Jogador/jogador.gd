@@ -388,7 +388,7 @@ func upgrade_character(upgrade):
 				healph = maxhealph
 			healthBar.value = healph
 			maxhealph = clamp(healph,0,maxhealph)
-	#adjust_gui_collection(upgrade)
+	adjust_gui_collection(upgrade)
 	attack()
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
@@ -455,21 +455,21 @@ func change_time(argtime = 0):
 		bossImg.visible = false
 		bossScene.visible = false
 
-#func adjust_gui_collection(upgrade):
-#	var get_upgraded_displayname = UpgradeDb.UPGRADES[upgrade]["display"]
-#	var get_type = UpgradeDb.UPGRADES[upgrade]["type"]
-#	if get_type != "item":
-#		var get_collected_displaynames = []
-#		for i in collected_upgrades:
-#			get_collected_displaynames.append(UpgradeDb.UPGRADES[i]["display"])
-#		if not get_upgraded_displayname in get_collected_displaynames:
-#			var new_item = itemContainer.instantiate()
-#			new_item.upgrade = upgrade
-#			match get_type:
-#				"weapon":
-#					collectedWeapons.add_child(new_item)
-#				"upgrade":
-#					collectedUpgrades.add_child(new_item)
+func adjust_gui_collection(upgrade):
+	var get_upgraded_displayname = UpgradeDb.UPGRADES[upgrade]["display"]
+	var get_type = UpgradeDb.UPGRADES[upgrade]["type"]
+	if get_type != "item":
+		var get_collected_displaynames = []
+		for i in collected_upgrades:
+			get_collected_displaynames.append(UpgradeDb.UPGRADES[i]["display"])
+		if not get_upgraded_displayname in get_collected_displaynames:
+			var new_item = itemContainer.instantiate()
+			new_item.upgrade = upgrade
+			match get_type:
+				"weapon":
+					collectedWeapons.add_child(new_item)
+				"upgrade":
+					collectedUpgrades.add_child(new_item)
 
 func death():
 	deathPanel.visible = true
