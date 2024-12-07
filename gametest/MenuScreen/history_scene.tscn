@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://MenuScreen/history_scene.gd" id="1_ru0og"]
 [ext_resource type="Texture2D" uid="uid://brxkgp33d5smp" path="res://Texturas/whitePaper.png" id="2_56mwh"]
 [ext_resource type="FontFile" uid="uid://dixtrjkh5vey" path="res://Texturas/Fonts/alagard.ttf" id="4_aq7ai"]
-[ext_resource type="PackedScene" uid="uid://ciaocokcky53" path="res://Utilidade/basic_button.tscn" id="5_xdpmp"]
+[ext_resource type="PackedScene" path="res://Utilidade/basic_button.tscn" id="5_xdpmp"]
 [ext_resource type="AudioStream" uid="uid://cf6rr1wh8ikip" path="res://introgame.mp3" id="6_1o0os"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j474h"]
@@ -150,7 +150,7 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_1o0os")
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [connection signal="click_end" from="background/bookTexture/btn_Ler" to="background/bookTexture/btn_Ler" method="_on_click_end"]
 [connection signal="pressed" from="background/bookTexture/btn_Ler" to="." method="_on_btn_ler_pressed"]

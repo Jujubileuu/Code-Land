@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dg0q5232s6edv"]
 
-[ext_resource type="PackedScene" uid="uid://ciaocokcky53" path="res://Utilidade/basic_button.tscn" id="1_kgq80"]
+[ext_resource type="PackedScene" path="res://Utilidade/basic_button.tscn" id="1_kgq80"]
 [ext_resource type="Script" path="res://MenuScreen/menu.gd" id="1_s3j26"]
 [ext_resource type="VideoStream" path="res://Texturas/menu.ogv" id="2_d5dep"]
 [ext_resource type="FontFile" uid="uid://dixtrjkh5vey" path="res://Texturas/Fonts/alagard.ttf" id="3_gfjot"]
@@ -104,7 +104,7 @@ text = "ESC"
 stream = ExtResource("5_gaumu")
 volume_db = 3.748
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [connection signal="click_end" from="btn_play" to="." method="_on_btn_play_click_end"]
 [connection signal="click_end" from="btn_play" to="btn_play" method="_on_click_end"]

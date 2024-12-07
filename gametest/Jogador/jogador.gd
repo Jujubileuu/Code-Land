@@ -292,7 +292,7 @@ func calculate_experiencecap():
 	elif experience_level < 16:
 		exp_cap + 95 * (experience_level-19)*8
 	else:
-		exp_cap = 255 + (experience_level-39)*12
+		exp_cap = 255 + (experience_level-39)*10
 	return exp_cap
 
 func set_bar(set_value = 1, set_max_value = maxhealph):
@@ -474,6 +474,8 @@ func adjust_gui_collection(upgrade):
 func death():
 	deathPanel.visible = true
 	get_tree().paused = true
+	anim.play("dead")
+	await get_tree().create_timer(5).timeout
 	var tween = deathPanel.create_tween()
 	tween.tween_property(deathPanel,"modulate",Color8(255,255,255,255),5).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
